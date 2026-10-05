@@ -1,0 +1,19 @@
+export enum RequirementType {
+  WORKFLOW = 'WORKFLOW',
+
+  APPROVAL = 'APPROVAL',
+
+  DOCUMENT = 'DOCUMENT',
+
+  TRAINING = 'TRAINING',
+
+  ASSET = 'ASSET',
+
+  MEETING = 'MEETING',
+
+  NOTIFICATION = 'NOTIFICATION',
+
+  EXTERNAL = 'EXTERNAL',
+
+  CUSTOM = 'CUSTOM',
+}

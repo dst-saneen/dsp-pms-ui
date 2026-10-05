@@ -1,0 +1,124 @@
+{
+  "recordedAt": "2026-09-02T07:51:22.909Z",
+  "payrollYear": 2026,
+  "payrollMonth": 8,
+  "payrollEnabledInEnv": true,
+  "results": [
+    {
+      "step": "ENV-PAYROLL",
+      "status": "Pass",
+      "notes": "PAYROLL_LITE=true; finance=true; jobs=true; storage=true",
+      "detail": null
+    },
+    {
+      "step": "LOGIN-MAKER",
+      "status": "Pass",
+      "notes": "learnfresh.hr01@example.test",
+      "detail": null
+    },
+    {
+      "step": "LOGIN-APPROVER",
+      "status": "Pass",
+      "notes": "faisal.approver.uat@learnfresh.test",
+      "detail": null
+    },
+    {
+      "step": "PAYROLL-01-CAPS",
+      "status": "Pass",
+      "notes": "payrollLite=true",
+      "detail": {
+        "ready": true,
+        "blockedReasons": []
+      }
+    },
+    {
+      "step": "PAYROLL-02-UNAUTHORIZED",
+      "status": "Pass",
+      "notes": "Employee blocked from payroll runs API",
+      "detail": {
+        "status": 403,
+        "code": "FORBIDDEN"
+      }
+    },
+    {
+      "step": "PAYROLL-02-PREFLIGHT",
+      "status": "Pass",
+      "notes": "blockers=[]",
+      "detail": {
+        "success": true,
+        "data": {
+          "blockers": [],
+          "warnings": [],
+          "eligibleEmployeeCount": 3
+        }
+      }
+    },
+    {
+      "step": "PAYROLL-02-CREATE",
+      "status": "Pass",
+      "notes": "Created PR-000005",
+      "detail": {
+        "id": "6cff3c74-8dd4-4793-9d15-e28e97dc5683",
+        "version": 0
+      }
+    },
+    {
+      "step": "PAYROLL-02-CALCULATE",
+      "status": "Pass",
+      "notes": "status=CALCULATED",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "PAYROLL-02-EMPLOYEES",
+      "status": "Pass",
+      "notes": "employeeLines=3",
+      "detail": {}
+    },
+    {
+      "step": "PAYROLL-03-SELF-APPROVE",
+      "status": "Pass",
+      "notes": "Maker self-approval blocked",
+      "detail": {
+        "status": 403,
+        "code": "FORBIDDEN"
+      }
+    },
+    {
+      "step": "PAYROLL-03-APPROVE",
+      "status": "Pass",
+      "notes": "Approved PR-000005",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "PAYROLL-03-MARK-PAID",
+      "status": "Fail",
+      "notes": "Mark paid failed",
+      "detail": {
+        "status": 409,
+        "code": "CONFLICT"
+      }
+    },
+    {
+      "step": "PAYROLL-03-REPLAY",
+      "status": "Fail",
+      "notes": "Idempotent mark-paid replay",
+      "detail": {
+        "status": 409,
+        "code": "CONFLICT"
+      }
+    },
+    {
+      "step": "PAYROLL-04",
+      "status": "Blocked",
+      "notes": "Payslip generation/download requires ClamAV scan worker (FILE_SCAN_WORKER_ENABLED + CLAMAV_HOST)",
+      "detail": null
+    }
+  ],
+  "passCount": 11,
+  "blockedCount": 1,
+  "failCount": 2
+}

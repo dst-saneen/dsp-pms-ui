@@ -1,0 +1,79 @@
+{
+  "recordedAt": "2026-08-13T06:14:22.747Z",
+  "phase": "8-uat-readiness",
+  "notes": "Read-only readiness for human UAT. Does not sign Employee/Manager/HR results.",
+  "identity": {
+    "database_name": "dsp_erp_dev",
+    "current_schema": "dsp_pms"
+  },
+  "b0Applied": true,
+  "migration": {
+    "migration_name": "20260811120000_leave_policy_matrix_and_manager_hr_approval",
+    "finished_at": "2026-08-13T05:57:41.849Z"
+  },
+  "globalLeaveWorkflow": {
+    "scopeKey": "GLOBAL:LEAVE_APPROVAL",
+    "steps": "1:REPORTING_MANAGER, 2:ROLE:HR_MANAGER"
+  },
+  "suggestedUatAccounts": [
+    {
+      "username": "leave.uat.emp",
+      "email": "leave.uat.emp@example.test",
+      "status": "ACTIVE",
+      "has_employee": true,
+      "employeeCode": "EMP-000017",
+      "firstName": "Leave",
+      "lastName": "UAT Employee",
+      "companyCode": "COM-000002",
+      "branchCode": "BR-000002",
+      "branch_name": "Kowdiar",
+      "has_manager": true
+    },
+    {
+      "username": "leave.uat.hr",
+      "email": "leave.uat.hr@example.test",
+      "status": "ACTIVE",
+      "has_employee": true,
+      "employeeCode": "EMP-000015",
+      "firstName": "Leave",
+      "lastName": "UAT HR",
+      "companyCode": "COM-000002",
+      "branchCode": "BR-000002",
+      "branch_name": "Kowdiar",
+      "has_manager": false
+    },
+    {
+      "username": "leave.uat.mgr",
+      "email": "leave.uat.mgr@example.test",
+      "status": "ACTIVE",
+      "has_employee": true,
+      "employeeCode": "EMP-000016",
+      "firstName": "Leave",
+      "lastName": "UAT Manager",
+      "companyCode": "COM-000002",
+      "branchCode": "BR-000002",
+      "branch_name": "Kowdiar",
+      "has_manager": false
+    }
+  ],
+  "uatAccountsFound": 3,
+  "pilotCompany": {
+    "id": "eadf7f5f-1669-4e90-9f32-0a1040e7cebf",
+    "companyCode": "COM-000002",
+    "name": "Datascape Technology Kowdiar"
+  },
+  "pilotBranches": [
+    {
+      "id": "d9b23f66-34d4-472e-a397-48a406787a99",
+      "branchCode": "BR-000002",
+      "name": "Kowdiar"
+    }
+  ],
+  "hrOnPilot": [
+    {
+      "role_code": "HR_MANAGER",
+      "users": 4
+    }
+  ],
+  "readyForHumanUat": true
+}

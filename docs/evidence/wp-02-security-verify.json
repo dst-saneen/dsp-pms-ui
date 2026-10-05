@@ -1,0 +1,66 @@
+{
+  "recordedAt": "2026-08-05T09:23:37.668Z",
+  "purpose": "WP-02 permissions and approval resolution verification",
+  "database": {
+    "name": "dsp_erp_dev",
+    "schema": "dsp_pms",
+    "host": "vtrios-db-lms.cp6mke4my3ho.ap-south-1.rds.amazonaws.com"
+  },
+  "permissionsPresent": [
+    "hr.attendance.lock",
+    "hr.attendance.regularize",
+    "hr.calendar.read",
+    "hr.comp-off.manage",
+    "hr.comp-off.read",
+    "hr.holidays.manage",
+    "hr.holidays.read",
+    "hr.overtime.approve",
+    "hr.overtime.manage",
+    "hr.overtime.read",
+    "hr.schedule.manage",
+    "hr.schedule.publish",
+    "hr.schedule.read",
+    "hr.team.approve",
+    "hr.team.read"
+  ],
+  "missingPermissions": [],
+  "roleGrantCounts": [
+    {
+      "role": "COMPANY_ADMINISTRATOR",
+      "c": 15
+    },
+    {
+      "role": "HR_MANAGER",
+      "c": 15
+    },
+    {
+      "role": "ORGANIZATION_OWNER",
+      "c": 15
+    },
+    {
+      "role": "PROJECT_MANAGER",
+      "c": 3
+    }
+  ],
+  "workflowSteps": [
+    {
+      "scopeKey": "GLOBAL:ATTENDANCE_REGULARIZATION",
+      "steps": 1
+    },
+    {
+      "scopeKey": "GLOBAL:LEAVE_APPROVAL",
+      "steps": 1
+    },
+    {
+      "scopeKey": "GLOBAL:OVERTIME_APPROVAL",
+      "steps": 1
+    }
+  ],
+  "acceptance": {
+    "allPermissionsPresent": true,
+    "ownerHasAll": true,
+    "hrHasAll": true,
+    "pmHasTeamCalendar": true,
+    "globalWorkflowsHaveStep1": true
+  }
+}

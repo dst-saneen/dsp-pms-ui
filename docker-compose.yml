@@ -1,0 +1,25 @@
+# Local development infrastructure for Group ERP.
+# Start Redis:  docker compose up -d redis
+# Stop:         docker compose down
+#
+# Pin Redis to 7.2.x (BSD-3-Clause). Do not use redis:7 / redis:7-alpine —
+# those float to 7.4+ (RSALv2 / SSPL). See docs/LICENSE_AUDIT.md.
+services:
+  redis:
+    image: redis:7.2.16-alpine
+    container_name: dsp-pms-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - dsp-pms-redis-data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  dsp-pms-redis-data:

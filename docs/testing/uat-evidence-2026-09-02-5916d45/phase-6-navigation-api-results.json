@@ -1,0 +1,158 @@
+{
+  "executedAt": "2026-09-02T08:06:37.807Z",
+  "commit": "5916d458cef64ba798fcc440ee9eff024462306c",
+  "summary": {
+    "total": 15,
+    "pass": 10,
+    "fail": 0,
+    "blocked": 2,
+    "partial": 2
+  },
+  "results": [
+    {
+      "step": "NAVIGATION-01 preflight",
+      "status": "INFO",
+      "notes": "API base http://localhost:4500",
+      "detail": null
+    },
+    {
+      "step": "NAV-01 env Learn Fresh onboarding allowlist",
+      "status": "Pass",
+      "notes": "ONBOARDING_V2 enabled for Learn Fresh HQ",
+      "detail": {
+        "ONBOARDING_V2_ENABLED": "true",
+        "ONBOARDING_V2_COMPANY_IDS": "e4c645f1-2359-439c-ac68-41785cf11e82",
+        "ONBOARDING_V2_BRANCH_IDS": ""
+      }
+    },
+    {
+      "step": "NAV-01 HR login",
+      "status": "Pass",
+      "notes": "learnfresh.hr01@example.test",
+      "detail": null
+    },
+    {
+      "step": "NAV-01 HR onboardingNav capability",
+      "status": "Pass",
+      "notes": "onboardingNav=true",
+      "detail": {
+        "projectsLite": true,
+        "officeFinanceLite": true,
+        "payrollLite": false,
+        "payrollDependencyState": {
+          "ready": false,
+          "blockedReasons": [
+            "PAYROLL_FILE_STORAGE_SCOPE_NOT_ENABLED"
+          ]
+        },
+        "projectsNav": false,
+        "onboardingNav": true,
+        "assetNav": true,
+        "deliveryOpsNav": false,
+        "fileOpsNav": false,
+        "officeFinanceNav": false,
+        "payrollNav": false,
+        "officeFinanceActions": []
+      }
+    },
+    {
+      "step": "NAV-01 HR employee-onboarding list",
+      "status": "Pass",
+      "notes": "GET /employee-onboarding → 200",
+      "detail": null
+    },
+    {
+      "step": "NAV-01 HR onboarding templates",
+      "status": "Pass",
+      "notes": "GET /onboarding-template → 200",
+      "detail": null
+    },
+    {
+      "step": "NAV-01 Employee login",
+      "status": "Pass",
+      "notes": "learnfresh.emp01@example.test",
+      "detail": null
+    },
+    {
+      "step": "NAV-01 Employee workspace capabilities",
+      "status": "Pass",
+      "notes": "GET /me/onboarding/workspace-capabilities → 200",
+      "detail": {
+        "sections": [
+          "MY_TASKS"
+        ]
+      }
+    },
+    {
+      "step": "NAV-01 Employee my onboarding tasks",
+      "status": "Pass",
+      "notes": "GET /me/onboarding-tasks → 200",
+      "detail": null
+    },
+    {
+      "step": "NAV-01 Employee blocked from HR monitoring routes",
+      "status": "Pass",
+      "notes": "employee-onboarding 403; department-queue 403",
+      "detail": null
+    },
+    {
+      "step": "NAV-01 Employee module capabilities",
+      "status": "Pass",
+      "notes": "onboardingNav=true",
+      "detail": {
+        "projectsLite": true,
+        "officeFinanceLite": true,
+        "payrollLite": false,
+        "payrollDependencyState": {
+          "ready": false,
+          "blockedReasons": [
+            "PAYROLL_FILE_STORAGE_SCOPE_NOT_ENABLED"
+          ]
+        },
+        "projectsNav": true,
+        "onboardingNav": true,
+        "assetNav": false,
+        "deliveryOpsNav": false,
+        "fileOpsNav": false,
+        "officeFinanceNav": false,
+        "payrollNav": false,
+        "officeFinanceActions": []
+      }
+    },
+    {
+      "step": "NAV-01 out-of-scope login (Datascape employee)",
+      "status": "Blocked",
+      "notes": "Login failed for arjun.nair@datascape.local",
+      "detail": {
+        "ok": false,
+        "status": 401,
+        "token": null,
+        "account": "arjun.nair@datascape.local"
+      }
+    },
+    {
+      "step": "NAV-01 out-of-scope (Datascape super admin)",
+      "status": "Partial",
+      "notes": "onboardingNav=false; HR list 200; user=arockia.jebin+1@datascapetek.com",
+      "detail": {
+        "expectedOutOfScope": "eadf7f5f-1669-4e90-9f32-0a1040e7cebf"
+      }
+    },
+    {
+      "step": "NAV-01 out-of-scope company live API",
+      "status": "Blocked",
+      "notes": "No working out-of-scope login; Jest Case 3 covers Datascape fail-closed logic",
+      "detail": null
+    },
+    {
+      "step": "NAV-01 branch-only allowlist simulation",
+      "status": "Partial",
+      "notes": "Company allowlist mode — branch-only toggle not applied live (Jest Case 4 Pass)",
+      "detail": {
+        "branchAllowlistConfigured": false,
+        "learnHqEnabled": true,
+        "otherBranchDenied": false
+      }
+    }
+  ]
+}

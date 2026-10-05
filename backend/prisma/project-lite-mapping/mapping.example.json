@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "businessPartyByProjectId": {
+    "<project-uuid>": "<business-party-uuid-same-company-CUSTOMER-or-BOTH>"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "warning": "DEV PROPOSAL ONLY — obtain manager sign-off before apply on dsp_erp_dev.",
+  "rules": {
+    "types": "Chair/Desk → GENERAL+LOCATION; all other listed types → HARDWARE+INDIVIDUAL",
+    "assets": "Open custody → employee department; otherwise branch default IT/engineering department"
+  },
+  "mappingPath": "D:\\app shell\\dsp-pms-app\\backend\\prisma\\asset-v2-mapping\\mapping.dev-proposed.json"
+}

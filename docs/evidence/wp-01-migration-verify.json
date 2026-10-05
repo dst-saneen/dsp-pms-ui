@@ -1,0 +1,150 @@
+{
+  "recordedAt": "2026-08-05T08:51:19.730Z",
+  "purpose": "WP-01 workforce migration verification",
+  "database": {
+    "name": "dsp_erp_dev",
+    "schema": "dsp_pms",
+    "host": "vtrios-db-lms.cp6mke4my3ho.ap-south-1.rds.amazonaws.com"
+  },
+  "migration": {
+    "migration_name": "20260805120000_workforce_time_management_foundation",
+    "finished_at": "2026-08-05T08:42:04.734Z"
+  },
+  "tables": [
+    {
+      "table": "shift_rosters",
+      "present": true
+    },
+    {
+      "table": "shift_roster_entries",
+      "present": true
+    },
+    {
+      "table": "shift_roster_overrides",
+      "present": true
+    },
+    {
+      "table": "attendance_policies",
+      "present": true
+    },
+    {
+      "table": "attendance_exceptions",
+      "present": true
+    },
+    {
+      "table": "attendance_regularizations",
+      "present": true
+    },
+    {
+      "table": "attendance_periods",
+      "present": true
+    },
+    {
+      "table": "leave_balance_transactions",
+      "present": true
+    },
+    {
+      "table": "overtime_policies",
+      "present": true
+    },
+    {
+      "table": "overtime_requests",
+      "present": true
+    },
+    {
+      "table": "comp_off_credits",
+      "present": true
+    },
+    {
+      "table": "comp_off_allocations",
+      "present": true
+    },
+    {
+      "table": "user_notifications",
+      "present": true
+    },
+    {
+      "table": "outbox_events",
+      "present": true
+    }
+  ],
+  "counts": {
+    "companies": {
+      "label": "companies",
+      "value": 4
+    },
+    "attendance": {
+      "label": "attendance",
+      "value": 0
+    },
+    "attendanceWithScheduleSnapshot": {
+      "label": "attendanceWithScheduleSnapshot",
+      "value": 0
+    },
+    "leaveTypes": {
+      "label": "leaveTypes",
+      "value": 7
+    },
+    "activeCompOffLeaveTypes": {
+      "label": "activeCompOffLeaveTypes",
+      "value": 4
+    },
+    "companiesMissingActiveCompOff": {
+      "label": "companiesMissingActiveCompOff",
+      "value": 0
+    },
+    "approvalWorkflows": {
+      "label": "approvalWorkflows",
+      "value": 3
+    },
+    "workforceGlobalWorkflows": {
+      "label": "workforceGlobalWorkflows",
+      "value": 3
+    },
+    "leaveBalanceTransactions": {
+      "label": "leaveBalanceTransactions",
+      "value": 0
+    },
+    "openingSnapshots": {
+      "label": "openingSnapshots",
+      "value": 0
+    },
+    "shiftRosters": {
+      "label": "shiftRosters",
+      "value": 0
+    },
+    "attendancePolicies": {
+      "label": "attendancePolicies",
+      "value": 0
+    },
+    "overtimePolicies": {
+      "label": "overtimePolicies",
+      "value": 0
+    },
+    "shiftsGraceDefault30": {
+      "label": "shiftsGraceDefault30",
+      "value": 1
+    }
+  },
+  "constraints": {
+    "leaveLedgerImmutableTrigger": {
+      "label": "leaveLedgerImmutableTrigger",
+      "value": 1
+    },
+    "partialUniqueCompOffLeaveType": {
+      "label": "partialUniqueCompOffLeaveType",
+      "value": 1
+    },
+    "rosterPeriodCheck": {
+      "label": "rosterPeriodCheck",
+      "value": 1
+    }
+  },
+  "acceptance": {
+    "allTablesPresent": true,
+    "everyCompanyHasActiveCompOff": true,
+    "workforceWorkflowsPresent": true,
+    "historicalAttendanceUnsnapshotted": true,
+    "ledgerTriggerPresent": true
+  }
+}

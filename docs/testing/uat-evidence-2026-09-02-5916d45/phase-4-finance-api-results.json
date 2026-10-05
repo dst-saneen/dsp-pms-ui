@@ -1,0 +1,174 @@
+{
+  "recordedAt": "2026-09-02T07:24:06.447Z",
+  "financeEnabledInEnv": true,
+  "baselineTransactionId": "f5d33da3-18f2-491d-852a-0402a709d3ea",
+  "results": [
+    {
+      "step": "ENV-FINANCE",
+      "status": "Pass",
+      "notes": "OFFICE_FINANCE_LITE=true; keys=true",
+      "detail": null
+    },
+    {
+      "step": "LOGIN-MAKER",
+      "status": "Pass",
+      "notes": "msaneen.dev@gmail.com",
+      "detail": null
+    },
+    {
+      "step": "LOGIN-APPROVER",
+      "status": "Pass",
+      "notes": "faisal.approver.uat@learnfresh.test",
+      "detail": null
+    },
+    {
+      "step": "FINANCE-03-CAPS",
+      "status": "Pass",
+      "notes": "officeFinanceLite=true",
+      "detail": null
+    },
+    {
+      "step": "FINANCE-03-NAV",
+      "status": "Pass",
+      "notes": "officeFinanceNav=true",
+      "detail": null
+    },
+    {
+      "step": "FINANCE-03-LIST-ALLOWED",
+      "status": "Pass",
+      "notes": "Authorized finance user can list when module ON",
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "step": "FINANCE-03-DIRECT-ID",
+      "status": "Pass",
+      "notes": "Authorized user can read baseline transaction",
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "step": "FINANCE-03-UNAUTHORIZED",
+      "status": "Pass",
+      "notes": "Employee without finance role blocked",
+      "detail": {
+        "status": 403,
+        "code": "FORBIDDEN"
+      }
+    },
+    {
+      "step": "FINANCE-03-HR-BLOCKED",
+      "status": "Pass",
+      "notes": "HR Manager blocked from finance API",
+      "detail": {
+        "status": 403,
+        "code": "FORBIDDEN"
+      }
+    },
+    {
+      "step": "FINANCE-01-SETUP",
+      "status": "Pass",
+      "notes": "Category + payment account resolved",
+      "detail": {
+        "categoryId": "b52fe443-07f3-47f5-aab2-7edfdb976b18",
+        "sourceAccountId": "3aabc9c5-df15-4acc-b322-e0ad0292bd7a",
+        "catsOk": true,
+        "accountsOk": true
+      }
+    },
+    {
+      "step": "FINANCE-01-CREATE",
+      "status": "Pass",
+      "notes": "Draft FT-000010",
+      "detail": {
+        "id": "b04b89a3-dfd7-4679-8413-e93fd2c2ac97",
+        "version": 0
+      }
+    },
+    {
+      "step": "FINANCE-01-EDIT",
+      "status": "Pass",
+      "notes": "Draft fields updated",
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "step": "FINANCE-01-BAD-DATE",
+      "status": "Pass",
+      "notes": "Date before account opening rejected",
+      "detail": {
+        "status": 409,
+        "code": "FINANCE_PERIOD_NOT_CONFIGURED"
+      }
+    },
+    {
+      "step": "FINANCE-01-PERSIST",
+      "status": "Pass",
+      "notes": "amount=175.50",
+      "detail": null
+    },
+    {
+      "step": "FINANCE-02-SUBMIT",
+      "status": "Pass",
+      "notes": "status=SUBMITTED",
+      "detail": null
+    },
+    {
+      "step": "FINANCE-02-SELF-APPROVE",
+      "status": "Pass",
+      "notes": "Maker self-approval blocked",
+      "detail": {
+        "status": 409,
+        "code": "FINANCE_SELF_APPROVAL_FORBIDDEN"
+      }
+    },
+    {
+      "step": "FINANCE-02-RETURN",
+      "status": "Pass",
+      "notes": "Approver returned to draft",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "FINANCE-02-RESUBMIT",
+      "status": "Pass",
+      "notes": "Maker resubmitted after return",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "FINANCE-02-APPROVE",
+      "status": "Pass",
+      "notes": "Approved FT-000010",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "FINANCE-02-REVERSE",
+      "status": "Pass",
+      "notes": "Reversal created",
+      "detail": {
+        "status": 201,
+        "reversalId": "b04b89a3-dfd7-4679-8413-e93fd2c2ac97"
+      }
+    },
+    {
+      "step": "FINANCE-02-REPLAY",
+      "status": "Pass",
+      "notes": "Replay blocked — no duplicate reversal (idempotent)",
+      "detail": {
+        "status": 409,
+        "code": "OPERATION_ID_REUSED"
+      }
+    }
+  ],
+  "passCount": 21,
+  "blockedCount": 0,
+  "failCount": 0
+}

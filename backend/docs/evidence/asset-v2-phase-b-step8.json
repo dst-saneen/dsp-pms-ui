@@ -1,0 +1,20 @@
+{
+  "preflightPath": "D:\\app shell\\dsp-pms-app\\backend\\docs\\evidence\\asset-v2-preflight-report.json",
+  "exceptionCount": 33,
+  "mappingTemplatePath": "D:\\app shell\\dsp-pms-app\\backend\\prisma\\asset-v2-mapping\\mapping.starter.json",
+  "pendingDraftPath": "D:\\app shell\\dsp-pms-app\\backend\\docs\\evidence\\asset-v2-mapping-pending.json",
+  "reviewCsvPath": "D:\\app shell\\dsp-pms-app\\backend\\docs\\evidence\\asset-v2-mapping-review.csv",
+  "counts": {
+    "typesNeedingClassification": 20,
+    "assetsNeedingDepartment": 12,
+    "custodySnapshotsMissing": 1,
+    "departmentReferences": 8
+  },
+  "nextSteps": [
+    "1. Send asset-v2-mapping-review.csv to manager/asset owner for approval.",
+    "2. Fill prisma/asset-v2-mapping/mapping.json from mapping-pending.json after manager approval.",
+    "3. Run: pnpm asset-v2:backfill -- --mapping=prisma/asset-v2-mapping/mapping.json",
+    "4. After dry-run ok: pnpm asset-v2:backfill -- --mapping=... --apply",
+    "5. Re-run: pnpm asset-v2:preflight until exceptionCount is 0."
+  ]
+}

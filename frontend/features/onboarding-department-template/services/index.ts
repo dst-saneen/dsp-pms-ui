@@ -1,0 +1,1 @@
+export * from "./onboarding-department-template.service";

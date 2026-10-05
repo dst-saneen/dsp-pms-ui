@@ -1,0 +1,950 @@
+================================================================================
+WP-01 Prisma schema draft — Workforce Time Management
+Source: docs/development/workforce-time-management-development-work-order.md § Database Contract
+================================================================================
+
+--------------------------------------------------------------------------------
+1) PATCH DESCRIPTION — EXACT EDITS TO EXISTING MODELS
+--------------------------------------------------------------------------------
+
+### enum DayPortion / LeaveTypeCategory / … (NEW)
+Append all new enums from section 2 below after existing enums (after OrganizationOnboardingStep / before SecurityEventType, or immediately before the MODELS banner — match “append after existing enums around line 200”).
+
+### model BranchWorkingDay
+ADD field:
+  dayPortion DayPortion @default(FULL_DAY)
+
+### model Holiday
+ADD field:
+  dayPortion DayPortion @default(FULL_DAY)
+ADD index:
+  @@index([companyId, branchId, holidayDate, isActive])
+
+### model LeaveType
+ADD field:
+  category LeaveTypeCategory @default(STANDARD)
+ADD inverse relations:
+  leaveBalanceTransactions LeaveBalanceTransaction[]
+  compOffCredits           CompOffCredit[]
+
+### model Attendance
+ADD fields (keep attendanceDate as DateTime — do NOT change to @db.Date):
+  shiftRosterEntryId      String?              @unique
+  scheduledStartAt        DateTime?
+  scheduledEndAt          DateTime?
+  scheduledBreakMinutes   Int?
+  scheduledNetMinutes     Int?
+  scheduleTimezone        String?
+  scheduleDayType         ShiftRosterDayType?
+  schedulePortion         DayPortion?
+  classificationReason    String?
+  finalizedAt             DateTime?
+ADD relation:
+  shiftRosterEntry ShiftRosterEntry? @relation(fields: [shiftRosterEntryId], references: [id], onDelete: Restrict)
+ADD inverse relations:
+  attendanceExceptions      AttendanceException[]
+  attendanceRegularizations AttendanceRegularization[]
+  overtimeRequests          OvertimeRequest[]
+
+### model Shift
+CHANGE:
+  graceInMinutes Int @default(15)  ->  graceInMinutes Int @default(30)
+ADD inverse:
+  shiftRosterEntries ShiftRosterEntry[]
+
+### model ApprovalWorkflow
+CHANGE:
+  workflowCode String @unique  ->  workflowCode String
+ADD field:
+  scopeKey String @unique
+ADD indexes:
+  @@index([workflowCode])
+  @@index([companyId, workflowCode, isActive])
+
+### model ApprovalTransaction
+ADD inverse relations:
+  attendanceRegularization AttendanceRegularization?
+  overtimeRequest          OvertimeRequest?
+
+### model EmployeeLeaveBalance
+ADD inverse:
+  leaveBalanceTransactions LeaveBalanceTransaction[]
+
+### model LeaveRequest
+ADD inverse relations:
+  leaveBalanceTransactions LeaveBalanceTransaction[]
+  compOffAllocations       CompOffAllocation[]
+
+### model Company
+ADD inverse relations:
+  shiftRosters              ShiftRoster[]
+  shiftRosterEntries        ShiftRosterEntry[]
+  shiftRosterOverrides      ShiftRosterOverride[]
+  attendancePolicies        AttendancePolicy[]
+  attendanceExceptions      AttendanceException[]
+  attendanceRegularizations AttendanceRegularization[]
+  attendancePeriods         AttendancePeriod[]
+  leaveBalanceTransactions  LeaveBalanceTransaction[]
+  overtimePolicies          OvertimePolicy[]
+  overtimeRequests          OvertimeRequest[]
+  compOffCredits            CompOffCredit[]
+  compOffAllocations        CompOffAllocation[]
+  userNotifications         UserNotification[]
+  outboxEvents              OutboxEvent[]
+
+### model Branch
+ADD inverse relations:
+  shiftRosters              ShiftRoster[]
+  shiftRosterEntries        ShiftRosterEntry[]
+  shiftRosterOverrides      ShiftRosterOverride[]
+  attendancePolicies        AttendancePolicy[]
+  attendanceExceptions      AttendanceException[]
+  attendanceRegularizations AttendanceRegularization[]
+  attendancePeriods         AttendancePeriod[]
+  leaveBalanceTransactions  LeaveBalanceTransaction[]
+  overtimePolicies          OvertimePolicy[]
+  overtimeRequests          OvertimeRequest[]
+  compOffCredits            CompOffCredit[]
+  compOffAllocations        CompOffAllocation[]
+  userNotifications         UserNotification[]
+  outboxEvents              OutboxEvent[]
+
+### model Employee
+ADD inverse relations:
+  shiftRosterEntries        ShiftRosterEntry[]
+  shiftRosterOverrides      ShiftRosterOverride[]
+  attendanceExceptions      AttendanceException[]
+  attendanceRegularizations AttendanceRegularization[]
+  leaveBalanceTransactions  LeaveBalanceTransaction[]
+  overtimeRequests          OvertimeRequest[]
+  compOffCredits            CompOffCredit[]
+  compOffAllocations        CompOffAllocation[]
+
+### model User
+ADD inverse relations (named where multiple FKs target User):
+  shiftRostersCreated              ShiftRoster[]               @relation("ShiftRosterCreatedBy")
+  shiftRostersPublished            ShiftRoster[]               @relation("ShiftRosterPublishedBy")
+  shiftRostersLocked               ShiftRoster[]               @relation("ShiftRosterLockedBy")
+  shiftRostersArchived             ShiftRoster[]               @relation("ShiftRosterArchivedBy")
+  shiftRosterOverridesChanged      ShiftRosterOverride[]       @relation("ShiftRosterOverrideChangedBy")
+  attendancePoliciesCreated        AttendancePolicy[]          @relation("AttendancePolicyCreatedBy")
+  overtimePoliciesCreated          OvertimePolicy[]            @relation("OvertimePolicyCreatedBy")
+  attendanceExceptionsResolved     AttendanceException[]       @relation("AttendanceExceptionResolvedBy")
+  attendanceRegularizationsRequested AttendanceRegularization[] @relation("AttendanceRegularizationRequestedBy")
+  attendanceRegularizationsReviewed  AttendanceRegularization[] @relation("AttendanceRegularizationReviewedBy")
+  attendancePeriodsReviewed        AttendancePeriod[]          @relation("AttendancePeriodReviewedBy")
+  attendancePeriodsLocked          AttendancePeriod[]          @relation("AttendancePeriodLockedBy")
+  attendancePeriodsPayrollPending  AttendancePeriod[]          @relation("AttendancePeriodPayrollPendingBy")
+  attendancePeriodsClosed          AttendancePeriod[]          @relation("AttendancePeriodClosedBy")
+  attendancePeriodsReopened        AttendancePeriod[]          @relation("AttendancePeriodReopenedBy")
+  leaveBalanceTransactionsCreated  LeaveBalanceTransaction[]   @relation("LeaveBalanceTransactionCreatedBy")
+  overtimeRequestsApproved         OvertimeRequest[]           @relation("OvertimeRequestApprovedBy")
+  overtimeRequestsRejected         OvertimeRequest[]           @relation("OvertimeRequestRejectedBy")
+  overtimeRequestsCancelled        OvertimeRequest[]           @relation("OvertimeRequestCancelledBy")
+  compOffCreditsRevoked            CompOffCredit[]             @relation("CompOffCreditRevokedBy")
+  userNotifications                UserNotification[]
+
+### model CompanyGroup  (required for optional FKs on UserNotification / OutboxEvent)
+ADD inverse relations:
+  userNotifications UserNotification[]
+  outboxEvents      OutboxEvent[]
+
+--------------------------------------------------------------------------------
+2) NEW ENUMS — append after existing enums (~line 200)
+--------------------------------------------------------------------------------
+
+enum DayPortion {
+  FULL_DAY
+  FIRST_HALF
+  SECOND_HALF
+}
+
+enum LeaveTypeCategory {
+  STANDARD
+  UNPAID
+  COMP_OFF
+}
+
+enum ShiftRosterStatus {
+  DRAFT
+  PUBLISHED
+  LOCKED
+  ARCHIVED
+}
+
+enum ShiftRosterDayType {
+  WORKING
+  WEEK_OFF
+  HOLIDAY
+  SCHEDULED_HALF_DAY
+}
+
+enum ShiftRosterEntrySource {
+  GENERATED
+  MANUAL_OVERRIDE
+}
+
+enum AttendanceExceptionType {
+  LATE
+  EARLY_DEPARTURE
+  MISSING_CHECK_IN
+  MISSING_CHECK_OUT
+  INSUFFICIENT_HOURS
+  UNSCHEDULED_WORK
+  SHIFT_MISMATCH
+}
+
+enum AttendanceExceptionStatus {
+  OPEN
+  SUBMITTED
+  APPROVED
+  REJECTED
+  RESOLVED
+}
+
+enum AttendanceRegularizationStatus {
+  SUBMITTED
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum AttendancePeriodStatus {
+  OPEN
+  REVIEW
+  LOCKED
+  PAYROLL_PENDING
+  CLOSED
+}
+
+enum LeaveBalanceTransactionType {
+  OPENING_SNAPSHOT
+  ENTITLEMENT
+  ACCRUAL
+  CARRY_FORWARD
+  RESERVATION
+  CONSUMPTION
+  REVERSAL
+  ADJUSTMENT
+  EXPIRY
+}
+
+enum OvertimeRoundingMode {
+  DOWN
+}
+
+enum OvertimeSettlementType {
+  COMP_OFF
+  PAYROLL_PENDING
+}
+
+enum OvertimeRequestStatus {
+  CALCULATED
+  SUBMITTED
+  APPROVED
+  REJECTED
+  SETTLED
+  CANCELLED
+}
+
+enum CompOffCreditStatus {
+  AVAILABLE
+  RESERVED
+  USED
+  EXPIRED
+  REVOKED
+}
+
+enum CompOffAllocationStatus {
+  RESERVED
+  CONSUMED
+  RELEASED
+}
+
+enum OutboxEventStatus {
+  PENDING
+  PROCESSING
+  PROCESSED
+  FAILED
+}
+
+--------------------------------------------------------------------------------
+3) NEW MODELS — append before end of schema.prisma (ShiftRoster through OutboxEvent)
+--------------------------------------------------------------------------------
+
+model ShiftRoster {
+  id String @id @default(uuid())
+
+  companyId String
+  branchId  String
+
+  periodStart DateTime @db.Date
+  periodEnd   DateTime @db.Date
+
+  version Int               @default(1)
+  status  ShiftRosterStatus @default(DRAFT)
+
+  createdByUserId   String
+  publishedByUserId String?
+  publishedAt       DateTime?
+  lockedByUserId    String?
+  lockedAt          DateTime?
+  archivedByUserId  String?
+  archivedAt        DateTime?
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch  Branch  @relation(fields: [branchId], references: [id], onDelete: Restrict)
+
+  createdByUser   User  @relation("ShiftRosterCreatedBy", fields: [createdByUserId], references: [id], onDelete: Restrict)
+  publishedByUser User? @relation("ShiftRosterPublishedBy", fields: [publishedByUserId], references: [id], onDelete: Restrict)
+  lockedByUser    User? @relation("ShiftRosterLockedBy", fields: [lockedByUserId], references: [id], onDelete: Restrict)
+  archivedByUser  User? @relation("ShiftRosterArchivedBy", fields: [archivedByUserId], references: [id], onDelete: Restrict)
+
+  entries ShiftRosterEntry[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([branchId, periodStart, periodEnd, version])
+  @@index([companyId, branchId, status])
+  @@index([branchId, periodStart, periodEnd])
+  @@index([createdByUserId])
+  @@index([publishedByUserId])
+  @@index([lockedByUserId])
+  @@index([archivedByUserId])
+  @@map("shift_rosters")
+}
+
+model ShiftRosterEntry {
+  id String @id @default(uuid())
+
+  shiftRosterId String
+  companyId     String
+  branchId      String
+  employeeId    String
+
+  workDate DateTime @db.Date
+
+  shiftId String?
+
+  scheduledStartAt    DateTime?
+  scheduledEndAt      DateTime?
+  breakMinutes        Int                   @default(0)
+  scheduledNetMinutes Int                   @default(0)
+  timezone            String
+  dayType             ShiftRosterDayType
+  dayPortion          DayPortion            @default(FULL_DAY)
+  source              ShiftRosterEntrySource @default(GENERATED)
+  generationKey       String
+
+  shiftRoster ShiftRoster @relation(fields: [shiftRosterId], references: [id], onDelete: Restrict)
+  company     Company     @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch      Branch      @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  employee    Employee    @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  shift       Shift?      @relation(fields: [shiftId], references: [id], onDelete: Restrict)
+
+  overrides            ShiftRosterOverride[]
+  attendance           Attendance?
+  attendanceExceptions AttendanceException[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([shiftRosterId, employeeId, workDate])
+  @@unique([shiftRosterId, generationKey])
+  @@index([employeeId, workDate])
+  @@index([branchId, workDate, dayType])
+  @@index([shiftRosterId, source])
+  @@index([companyId])
+  @@index([shiftId])
+  @@map("shift_roster_entries")
+}
+
+model ShiftRosterOverride {
+  id String @id @default(uuid())
+
+  shiftRosterEntryId String
+  companyId          String
+  branchId           String
+  employeeId         String
+
+  previousSnapshot Json
+  newSnapshot      Json
+  reason           String
+
+  changedByUserId String
+
+  shiftRosterEntry ShiftRosterEntry @relation(fields: [shiftRosterEntryId], references: [id], onDelete: Restrict)
+  company          Company          @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch           Branch           @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  employee         Employee         @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  changedByUser    User             @relation("ShiftRosterOverrideChangedBy", fields: [changedByUserId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+
+  @@index([shiftRosterEntryId, createdAt])
+  @@index([changedByUserId, createdAt])
+  @@index([companyId])
+  @@index([branchId])
+  @@index([employeeId])
+  @@map("shift_roster_overrides")
+}
+
+model AttendancePolicy {
+  id String @id @default(uuid())
+
+  companyId String
+  branchId  String?
+
+  effectiveFrom DateTime  @db.Date
+  effectiveTo   DateTime? @db.Date
+
+  lateGraceMinutes               Int @default(30)
+  earlyDepartureGraceMinutes     Int @default(15)
+  fullDayThresholdPercent        Int @default(90)
+  halfDayThresholdPercent        Int @default(50)
+  regularizationWindowDays       Int @default(3)
+  leaveBackdateWindowDays        Int @default(3)
+  finalizationDelayMinutes       Int @default(180)
+  maxOpenShiftMinutes            Int @default(1440)
+  latePenaltyEnabled             Boolean @default(false)
+  automaticLeaveDeductionEnabled Boolean @default(false)
+  isActive                       Boolean @default(true)
+
+  createdByUserId String
+
+  company       Company @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch        Branch? @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  createdByUser User    @relation("AttendancePolicyCreatedBy", fields: [createdByUserId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([companyId, branchId, isActive])
+  @@index([companyId, effectiveFrom])
+  @@index([branchId, effectiveFrom])
+  @@index([createdByUserId])
+  @@map("attendance_policies")
+  // PARTIAL UNIQUE INDEXES — add in migration SQL (Prisma cannot express):
+  // -- CREATE UNIQUE INDEX ux_attendance_policies_company_effective_from
+  // --   ON dsp_pms.attendance_policies (company_id, effective_from)
+  // --   WHERE branch_id IS NULL;
+  // -- CREATE UNIQUE INDEX ux_attendance_policies_branch_effective_from
+  // --   ON dsp_pms.attendance_policies (branch_id, effective_from)
+  // --   WHERE branch_id IS NOT NULL;
+}
+
+model AttendanceException {
+  id String @id @default(uuid())
+
+  companyId  String
+  branchId   String
+  employeeId String
+
+  attendanceId       String?
+  shiftRosterEntryId String?
+
+  businessDate DateTime                   @db.Date
+  type         AttendanceExceptionType
+  status       AttendanceExceptionStatus  @default(OPEN)
+  dedupeKey    String                     @unique
+  details      Json?
+
+  detectedAt DateTime
+
+  resolvedByUserId String?
+  resolvedAt       DateTime?
+  resolutionCode   String?
+
+  company          Company           @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch           Branch            @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  employee         Employee          @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  attendance       Attendance?       @relation(fields: [attendanceId], references: [id], onDelete: Restrict)
+  shiftRosterEntry ShiftRosterEntry? @relation(fields: [shiftRosterEntryId], references: [id], onDelete: Restrict)
+  resolvedByUser   User?             @relation("AttendanceExceptionResolvedBy", fields: [resolvedByUserId], references: [id], onDelete: Restrict)
+
+  attendanceRegularizations AttendanceRegularization[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([employeeId, businessDate, status])
+  @@index([branchId, businessDate, type, status])
+  @@index([attendanceId, type])
+  @@index([companyId])
+  @@index([shiftRosterEntryId])
+  @@index([resolvedByUserId])
+  @@map("attendance_exceptions")
+}
+
+model AttendanceRegularization {
+  id String @id @default(uuid())
+
+  companyId  String
+  branchId   String
+  employeeId String
+
+  attendanceId          String
+  attendanceExceptionId String?
+
+  proposedCheckInAt  DateTime?
+  proposedCheckOutAt DateTime?
+  reason             String
+
+  status AttendanceRegularizationStatus @default(SUBMITTED)
+
+  approvalTransactionId String? @unique
+
+  requestedByUserId String
+  submittedAt       DateTime
+
+  reviewedByUserId String?
+  reviewedAt       DateTime?
+  reviewerRemarks  String?
+
+  company             Company              @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch              Branch               @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  employee            Employee             @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  attendance          Attendance           @relation(fields: [attendanceId], references: [id], onDelete: Restrict)
+  attendanceException AttendanceException? @relation(fields: [attendanceExceptionId], references: [id], onDelete: Restrict)
+  approvalTransaction ApprovalTransaction? @relation(fields: [approvalTransactionId], references: [id], onDelete: Restrict)
+  requestedByUser     User                 @relation("AttendanceRegularizationRequestedBy", fields: [requestedByUserId], references: [id], onDelete: Restrict)
+  reviewedByUser      User?                @relation("AttendanceRegularizationReviewedBy", fields: [reviewedByUserId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([companyId])
+  @@index([branchId])
+  @@index([employeeId])
+  @@index([attendanceId])
+  @@index([attendanceExceptionId])
+  @@index([status])
+  @@index([requestedByUserId])
+  @@index([reviewedByUserId])
+  @@map("attendance_regularizations")
+  // PARTIAL UNIQUE INDEX — add in migration SQL:
+  // -- CREATE UNIQUE INDEX ux_attendance_regularizations_one_submitted_per_attendance
+  // --   ON dsp_pms.attendance_regularizations (attendance_id)
+  // --   WHERE status = 'SUBMITTED';
+}
+
+model AttendancePeriod {
+  id String @id @default(uuid())
+
+  companyId String
+  branchId  String
+
+  periodYear  Int
+  periodMonth Int
+
+  periodStart DateTime @db.Date
+  periodEnd   DateTime @db.Date
+
+  status  AttendancePeriodStatus @default(OPEN)
+  version Int                    @default(1)
+
+  reviewedByUserId String?
+  reviewedAt       DateTime?
+
+  lockedByUserId String?
+  lockedAt       DateTime?
+
+  payrollPendingByUserId String?
+  payrollPendingAt       DateTime?
+
+  closedByUserId String?
+  closedAt       DateTime?
+
+  reopenedByUserId String?
+  reopenedAt       DateTime?
+  reopenReason     String?
+
+  company              Company @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch               Branch  @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  reviewedByUser       User?   @relation("AttendancePeriodReviewedBy", fields: [reviewedByUserId], references: [id], onDelete: Restrict)
+  lockedByUser         User?   @relation("AttendancePeriodLockedBy", fields: [lockedByUserId], references: [id], onDelete: Restrict)
+  payrollPendingByUser User?   @relation("AttendancePeriodPayrollPendingBy", fields: [payrollPendingByUserId], references: [id], onDelete: Restrict)
+  closedByUser         User?   @relation("AttendancePeriodClosedBy", fields: [closedByUserId], references: [id], onDelete: Restrict)
+  reopenedByUser       User?   @relation("AttendancePeriodReopenedBy", fields: [reopenedByUserId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([branchId, periodYear, periodMonth])
+  @@index([companyId, branchId, status])
+  @@index([reviewedByUserId])
+  @@index([lockedByUserId])
+  @@index([payrollPendingByUserId])
+  @@index([closedByUserId])
+  @@index([reopenedByUserId])
+  @@map("attendance_periods")
+}
+
+model LeaveBalanceTransaction {
+  id String @id @default(uuid())
+
+  companyId      String
+  branchId       String?
+  employeeId     String
+  leaveTypeId    String
+  leaveBalanceId String
+  leaveRequestId String?
+
+  transactionType LeaveBalanceTransactionType
+
+  entitlementDelta Decimal @default(0) @db.Decimal(5, 2)
+  usedDelta        Decimal @default(0) @db.Decimal(5, 2)
+  pendingDelta     Decimal @default(0) @db.Decimal(5, 2)
+  balanceDelta     Decimal @default(0) @db.Decimal(5, 2)
+
+  entitlementAfter Decimal @db.Decimal(5, 2)
+  usedAfter        Decimal @db.Decimal(5, 2)
+  pendingAfter     Decimal @db.Decimal(5, 2)
+  balanceAfter     Decimal @db.Decimal(5, 2)
+
+  effectiveDate DateTime @db.Date
+
+  referenceType  String
+  referenceId    String
+  idempotencyKey String  @unique
+  reason         String?
+
+  createdByUserId String?
+
+  company      Company               @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch       Branch?               @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  employee     Employee              @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  leaveType    LeaveType             @relation(fields: [leaveTypeId], references: [id], onDelete: Restrict)
+  leaveBalance EmployeeLeaveBalance  @relation(fields: [leaveBalanceId], references: [id], onDelete: Restrict)
+  leaveRequest LeaveRequest?         @relation(fields: [leaveRequestId], references: [id], onDelete: Restrict)
+  createdByUser User?                @relation("LeaveBalanceTransactionCreatedBy", fields: [createdByUserId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+
+  @@index([leaveBalanceId, effectiveDate])
+  @@index([employeeId, leaveTypeId, effectiveDate])
+  @@index([referenceType, referenceId])
+  @@index([companyId])
+  @@index([branchId])
+  @@index([leaveRequestId])
+  @@index([createdByUserId])
+  @@map("leave_balance_transactions")
+}
+
+model OvertimePolicy {
+  id String @id @default(uuid())
+
+  companyId String
+  branchId  String?
+
+  effectiveFrom DateTime  @db.Date
+  effectiveTo   DateTime? @db.Date
+
+  minimumEligibleMinutes           Int                  @default(30)
+  roundingMinutes                  Int                  @default(15)
+  roundingMode                     OvertimeRoundingMode @default(DOWN)
+  includeEarlyArrival              Boolean              @default(false)
+  requireScheduledMinutesFulfilled Boolean              @default(true)
+  allowCompOff                     Boolean              @default(true)
+  allowPayrollPending              Boolean              @default(true)
+  compOffHalfDayMinutes            Int                  @default(240)
+  compOffFullDayMinutes            Int                  @default(480)
+  maxCompOffDaysPerSource          Decimal              @default(1.00) @db.Decimal(5, 2)
+  compOffExpiryDays                Int                  @default(90)
+  maxDailyMinutes                  Int?
+  maxMonthlyMinutes                Int?
+  requiresApproval                 Boolean              @default(true)
+  isActive                         Boolean              @default(true)
+
+  createdByUserId String
+
+  company       Company @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch        Branch? @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  createdByUser User    @relation("OvertimePolicyCreatedBy", fields: [createdByUserId], references: [id], onDelete: Restrict)
+
+  overtimeRequests OvertimeRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([companyId, branchId, isActive])
+  @@index([companyId, effectiveFrom])
+  @@index([branchId, effectiveFrom])
+  @@index([createdByUserId])
+  @@map("overtime_policies")
+  // PARTIAL UNIQUE INDEXES — add in migration SQL:
+  // -- CREATE UNIQUE INDEX ux_overtime_policies_company_effective_from
+  // --   ON dsp_pms.overtime_policies (company_id, effective_from)
+  // --   WHERE branch_id IS NULL;
+  // -- CREATE UNIQUE INDEX ux_overtime_policies_branch_effective_from
+  // --   ON dsp_pms.overtime_policies (branch_id, effective_from)
+  // --   WHERE branch_id IS NOT NULL;
+}
+
+model OvertimeRequest {
+  id String @id @default(uuid())
+
+  companyId  String
+  branchId   String
+  employeeId String
+
+  attendanceId     String
+  overtimePolicyId String?
+
+  businessDate DateTime @db.Date
+
+  rawMinutes       Int
+  eligibleMinutes  Int
+  requestedMinutes Int
+  approvedMinutes  Int?
+
+  requestedSettlement OvertimeSettlementType
+  approvedSettlement  OvertimeSettlementType?
+
+  status OvertimeRequestStatus @default(CALCULATED)
+
+  calculationSnapshot Json
+  reason              String?
+
+  approvalTransactionId String? @unique
+
+  submittedAt DateTime?
+
+  approvedByUserId String?
+  approvedAt       DateTime?
+
+  rejectedByUserId String?
+  rejectedAt       DateTime?
+
+  cancelledByUserId String?
+  cancelledAt       DateTime?
+
+  settledAt DateTime?
+
+  company             Company              @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch              Branch               @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  employee            Employee             @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  attendance          Attendance           @relation(fields: [attendanceId], references: [id], onDelete: Restrict)
+  overtimePolicy      OvertimePolicy?      @relation(fields: [overtimePolicyId], references: [id], onDelete: Restrict)
+  approvalTransaction ApprovalTransaction? @relation(fields: [approvalTransactionId], references: [id], onDelete: Restrict)
+  approvedByUser      User?                @relation("OvertimeRequestApprovedBy", fields: [approvedByUserId], references: [id], onDelete: Restrict)
+  rejectedByUser      User?                @relation("OvertimeRequestRejectedBy", fields: [rejectedByUserId], references: [id], onDelete: Restrict)
+  cancelledByUser     User?                @relation("OvertimeRequestCancelledBy", fields: [cancelledByUserId], references: [id], onDelete: Restrict)
+
+  compOffCredit CompOffCredit?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([employeeId, businessDate, status])
+  @@index([branchId, status, businessDate])
+  @@index([companyId])
+  @@index([attendanceId])
+  @@index([overtimePolicyId])
+  @@index([approvedByUserId])
+  @@index([rejectedByUserId])
+  @@index([cancelledByUserId])
+  @@map("overtime_requests")
+  // PARTIAL UNIQUE INDEX — add in migration SQL:
+  // -- CREATE UNIQUE INDEX ux_overtime_requests_one_active_per_attendance
+  // --   ON dsp_pms.overtime_requests (attendance_id)
+  // --   WHERE status IN ('CALCULATED', 'SUBMITTED', 'APPROVED', 'SETTLED');
+}
+
+model CompOffCredit {
+  id String @id @default(uuid())
+
+  companyId  String
+  branchId   String
+  employeeId String
+
+  overtimeRequestId String @unique
+  leaveTypeId       String
+
+  sourceDate    DateTime @db.Date
+  earnedDays    Decimal  @db.Decimal(5, 2)
+  availableDays Decimal  @db.Decimal(5, 2)
+  reservedDays  Decimal  @db.Decimal(5, 2)
+  usedDays      Decimal  @db.Decimal(5, 2)
+  expiresOn     DateTime @db.Date
+
+  status CompOffCreditStatus
+
+  revokedByUserId String?
+  revokedAt       DateTime?
+  revokeReason    String?
+
+  company         Company         @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch          Branch          @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  employee        Employee        @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  overtimeRequest OvertimeRequest @relation(fields: [overtimeRequestId], references: [id], onDelete: Restrict)
+  leaveType       LeaveType       @relation(fields: [leaveTypeId], references: [id], onDelete: Restrict)
+  revokedByUser   User?           @relation("CompOffCreditRevokedBy", fields: [revokedByUserId], references: [id], onDelete: Restrict)
+
+  allocations CompOffAllocation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([employeeId, status, expiresOn])
+  @@index([companyId])
+  @@index([branchId])
+  @@index([leaveTypeId])
+  @@index([revokedByUserId])
+  @@map("comp_off_credits")
+}
+
+model CompOffAllocation {
+  id String @id @default(uuid())
+
+  companyId  String
+  branchId   String
+  employeeId String
+
+  compOffCreditId String
+  leaveRequestId  String
+
+  allocatedDays Decimal                @db.Decimal(5, 2)
+  status        CompOffAllocationStatus @default(RESERVED)
+
+  reservedAt DateTime?
+  consumedAt DateTime?
+  releasedAt DateTime?
+
+  company       Company       @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch        Branch        @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  employee      Employee      @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+  compOffCredit CompOffCredit @relation(fields: [compOffCreditId], references: [id], onDelete: Restrict)
+  leaveRequest  LeaveRequest  @relation(fields: [leaveRequestId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([compOffCreditId, leaveRequestId])
+  @@index([leaveRequestId, status])
+  @@index([compOffCreditId, status])
+  @@index([companyId])
+  @@index([branchId])
+  @@index([employeeId])
+  @@map("comp_off_allocations")
+}
+
+model UserNotification {
+  id String @id @default(uuid())
+
+  userId         String
+  companyGroupId String?
+  companyId      String?
+  branchId       String?
+
+  eventCode  String
+  entityType String?
+  entityId   String?
+  title      String
+  message    String
+  dedupeKey  String @unique
+
+  readAt    DateTime?
+  expiresAt DateTime?
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Restrict)
+  companyGroup CompanyGroup? @relation(fields: [companyGroupId], references: [id], onDelete: Restrict)
+  company      Company?      @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch       Branch?       @relation(fields: [branchId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, readAt, createdAt])
+  @@index([companyId, eventCode, createdAt])
+  @@index([companyGroupId])
+  @@index([branchId])
+  @@map("user_notifications")
+}
+
+model OutboxEvent {
+  id String @id @default(uuid())
+
+  companyGroupId String?
+  companyId      String?
+  branchId       String?
+
+  aggregateType String
+  aggregateId   String
+  eventType     String
+  payload       Json
+  dedupeKey     String @unique
+
+  status      OutboxEventStatus @default(PENDING)
+  attempts    Int               @default(0)
+  availableAt DateTime          @default(now())
+  lockedAt    DateTime?
+  processedAt DateTime?
+  lastErrorCode String?
+
+  companyGroup CompanyGroup? @relation(fields: [companyGroupId], references: [id], onDelete: Restrict)
+  company      Company?      @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  branch       Branch?       @relation(fields: [branchId], references: [id], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, availableAt])
+  @@index([aggregateType, aggregateId, createdAt])
+  @@index([companyGroupId])
+  @@index([companyId])
+  @@index([branchId])
+  @@map("outbox_events")
+}
+
+--------------------------------------------------------------------------------
+4) PARTIAL UNIQUE INDEXES — SQL comments for migration (Prisma cannot express)
+--------------------------------------------------------------------------------
+
+-- LeaveType: at most one active COMP_OFF per company
+-- CREATE UNIQUE INDEX ux_leave_types_one_active_comp_off_per_company
+--   ON dsp_pms.leave_types (company_id)
+--   WHERE category = 'COMP_OFF' AND is_active = true;
+
+-- AttendancePolicy: company-scope and branch-scope effective_from
+-- CREATE UNIQUE INDEX ux_attendance_policies_company_effective_from
+--   ON dsp_pms.attendance_policies (company_id, effective_from)
+--   WHERE branch_id IS NULL;
+-- CREATE UNIQUE INDEX ux_attendance_policies_branch_effective_from
+--   ON dsp_pms.attendance_policies (branch_id, effective_from)
+--   WHERE branch_id IS NOT NULL;
+
+-- OvertimePolicy: same effective-range scope uniqueness as AttendancePolicy
+-- CREATE UNIQUE INDEX ux_overtime_policies_company_effective_from
+--   ON dsp_pms.overtime_policies (company_id, effective_from)
+--   WHERE branch_id IS NULL;
+-- CREATE UNIQUE INDEX ux_overtime_policies_branch_effective_from
+--   ON dsp_pms.overtime_policies (branch_id, effective_from)
+--   WHERE branch_id IS NOT NULL;
+
+-- AttendanceRegularization: one SUBMITTED per attendance
+-- CREATE UNIQUE INDEX ux_attendance_regularizations_one_submitted_per_attendance
+--   ON dsp_pms.attendance_regularizations (attendance_id)
+--   WHERE status = 'SUBMITTED';
+
+-- OvertimeRequest: one active request per attendance
+-- CREATE UNIQUE INDEX ux_overtime_requests_one_active_per_attendance
+--   ON dsp_pms.overtime_requests (attendance_id)
+--   WHERE status IN ('CALCULATED', 'SUBMITTED', 'APPROVED', 'SETTLED');
+
+--------------------------------------------------------------------------------
+5) NOTES (non-schema)
+--------------------------------------------------------------------------------
+- Attendance.attendanceDate remains DateTime (no @db.Date) for compatibility.
+- New date-only business fields use DateTime @db.Date.
+- OvertimeRoundingMode has only DOWN.
+- Check constraints, 62-day roster range, Comp-off balance equation, and immutable
+  leave-ledger trigger are separate migration SQL (work order §5) — not listed as
+  partial unique indexes above.
+- Work-order shorthand “lifecycle actor/timestamps” expanded as:
+  - Policies: createdByUserId + createdAt/updatedAt
+  - AttendancePeriod: reviewed*/locked*/payrollPending*/closed*/reopened* pairs
+  - OvertimeRequest: submittedAt + approved*/rejected*/cancelled* + settledAt
+  - CompOffCredit: revokedByUserId/revokedAt/revokeReason
+  - CompOffAllocation: reservedAt/consumedAt/releasedAt
+- CompanyGroup inverses added only so optional companyGroupId FKs validate in Prisma.

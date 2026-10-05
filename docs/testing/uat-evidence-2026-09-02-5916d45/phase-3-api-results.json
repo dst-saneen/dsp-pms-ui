@@ -1,0 +1,615 @@
+{
+  "recordedAt": "2026-09-02T06:53:17.470Z",
+  "projectId": "0e29272e-69dd-48a0-b97f-b660f08aab67",
+  "timesheetProjectId": "d1583301-ac07-44d0-909f-0cf06116f090",
+  "timesheetId": "758cebb3-6509-41eb-baa3-e707d5d12591",
+  "results": [
+    {
+      "step": "LOGIN-OWNER",
+      "status": "Pass",
+      "notes": "Owner logged in (msaneen.dev@gmail.com)",
+      "detail": null
+    },
+    {
+      "step": "CAPS-OWNER",
+      "status": "Pass",
+      "notes": "projectsLite=true",
+      "detail": null
+    },
+    {
+      "step": "PROJECT-01-CREATE",
+      "status": "Pass",
+      "notes": "Created PRJ-000015",
+      "detail": {
+        "id": "0e29272e-69dd-48a0-b97f-b660f08aab67",
+        "version": 1
+      }
+    },
+    {
+      "step": "PROJECT-01-NEG-BP",
+      "status": "Pass",
+      "notes": "Business party rejected on INTERNAL",
+      "detail": {
+        "status": 409
+      }
+    },
+    {
+      "step": "PROJECT-01-UPDATE",
+      "status": "Pass",
+      "notes": "Draft fields updated",
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "step": "PROJECT-01-STAGE-PRE",
+      "status": "Pass",
+      "notes": "Stage created before activation (server rule)",
+      "detail": {
+        "id": "d80eb288-c6b4-4b18-b033-542ec6b85148"
+      }
+    },
+    {
+      "step": "PROJECT-01-ACTIVATE",
+      "status": "Pass",
+      "notes": "Activated status=ACTIVE",
+      "detail": {
+        "status": 201,
+        "body": {
+          "success": true,
+          "data": {
+            "id": "0e29272e-69dd-48a0-b97f-b660f08aab67",
+            "version": 3,
+            "projectCode": "PRJ-000015",
+            "projectName": "UAT-2026-09-02-4462",
+            "description": "UAT Phase 3 automated update",
+            "projectType": "INTERNAL",
+            "status": "ACTIVE",
+            "companyId": "e4c645f1-2359-439c-ac68-41785cf11e82",
+            "branchId": "5c79da96-64e5-4027-83fc-4c1de736b10c",
+            "projectManagerId": "c61231aa-8f3a-41b6-958c-30d8f729246b",
+            "businessPartyId": null,
+            "currencyCode": "INR",
+            "expectedIncome": "100000",
+            "expenseBudget": null,
+            "startDate": "2026-09-01T00:00:00.000Z",
+            "endDate": "2026-12-31T00:00:00.000Z",
+            "archivedAt": null,
+            "allowedActions": [
+              "EDIT",
+              "HOLD",
+              "COMPLETE",
+              "CANCEL",
+              "MANAGE_STAGES",
+              "MANAGE_TEAM",
+              "MANAGE_TASKS"
+            ],
+            "actionRequirements": {
+              "expectedVersion": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-01-AUTHZ",
+      "status": "Pass",
+      "notes": "Employee cannot create stage",
+      "detail": {
+        "status": 403
+      }
+    },
+    {
+      "step": "PROJECT-02-STAGE",
+      "status": "Pass",
+      "notes": "Using pre-activation stage STG-PRE",
+      "detail": {
+        "id": "d80eb288-c6b4-4b18-b033-542ec6b85148"
+      }
+    },
+    {
+      "step": "PROJECT-02-STAGE-ACTIVATE",
+      "status": "Pass",
+      "notes": "Stage activated",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "PROJECT-02-TEAM",
+      "status": "Pass",
+      "notes": "Team member added",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "PROJECT-02-TASK",
+      "status": "Pass",
+      "notes": "Task created",
+      "detail": {
+        "id": "dcff8153-3e74-49e4-b17f-d364f74cae54"
+      }
+    },
+    {
+      "step": "PROJECT-02-ASSIGN",
+      "status": "Pass",
+      "notes": "Task assigned",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "PROJECT-02-UNASSIGN",
+      "status": "Pass",
+      "notes": "Pre-start unassign OK",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "PROJECT-02-REASSIGN",
+      "status": "Pass",
+      "notes": "Reassigned",
+      "detail": null
+    },
+    {
+      "step": "PROJECT-02-START",
+      "status": "Pass",
+      "notes": "Employee started task",
+      "detail": null
+    },
+    {
+      "step": "PROJECT-02-SUBMIT",
+      "status": "Pass",
+      "notes": "Submitted for review",
+      "detail": null
+    },
+    {
+      "step": "PROJECT-02-RETURN",
+      "status": "Pass",
+      "notes": "PM returned task",
+      "detail": null
+    },
+    {
+      "step": "PROJECT-02-RESUBMIT",
+      "status": "Pass",
+      "notes": "Employee resubmitted",
+      "detail": null
+    },
+    {
+      "step": "PROJECT-02-COMPLETE-TASK",
+      "status": "Pass",
+      "notes": "Task completed",
+      "detail": null
+    },
+    {
+      "step": "PROJECT-02-COMPLETE-STAGE",
+      "status": "Pass",
+      "notes": "Stage completed",
+      "detail": null
+    },
+    {
+      "step": "PROJECT-02-COMPLETE-PROJECT",
+      "status": "Pass",
+      "notes": "Project completed",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "step": "PROJECT-02-TERMINAL",
+      "status": "Pass",
+      "notes": "Child mutation blocked after completion",
+      "detail": {
+        "status": 409
+      }
+    },
+    {
+      "step": "PROJECT-03-PROJECT-ACTIVATE",
+      "status": "Pass",
+      "notes": "Timesheet project activated",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "d1583301-ac07-44d0-909f-0cf06116f090",
+            "version": 2,
+            "projectCode": "PRJ-000016",
+            "projectName": "UAT-TS-7831",
+            "description": null,
+            "projectType": "INTERNAL",
+            "status": "ACTIVE",
+            "companyId": "e4c645f1-2359-439c-ac68-41785cf11e82",
+            "branchId": "5c79da96-64e5-4027-83fc-4c1de736b10c",
+            "projectManagerId": "c61231aa-8f3a-41b6-958c-30d8f729246b",
+            "businessPartyId": null,
+            "currencyCode": null,
+            "expectedIncome": null,
+            "expenseBudget": null,
+            "startDate": "2026-09-01T00:00:00.000Z",
+            "endDate": null,
+            "archivedAt": null,
+            "allowedActions": [
+              "EDIT",
+              "HOLD",
+              "COMPLETE",
+              "CANCEL",
+              "MANAGE_STAGES",
+              "MANAGE_TEAM",
+              "MANAGE_TASKS"
+            ],
+            "actionRequirements": {
+              "expectedVersion": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-TASK-ASSIGN",
+      "status": "Pass",
+      "notes": "Timesheet task assigned",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "fc63824f-620b-40dd-9b37-f40709a3e345",
+            "version": 2,
+            "projectId": "d1583301-ac07-44d0-909f-0cf06116f090",
+            "stageId": "a0b3ff75-abb3-4d79-a508-afd4a9d79e87",
+            "taskCode": "TS-T1",
+            "taskName": "Timesheet Task",
+            "description": null,
+            "parentTaskId": null,
+            "priority": "MEDIUM",
+            "plannedHours": "0",
+            "completionPercentage": "0",
+            "status": "ASSIGNED",
+            "startDate": null,
+            "dueDate": null,
+            "activeParticipantEmployeeIds": [
+              "f60e46ed-20da-4703-8593-2849fa90492d"
+            ],
+            "allowedActions": [
+              "REASSIGN",
+              "UNASSIGN",
+              "CANCEL"
+            ],
+            "actionRequirements": {
+              "expectedVersion": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-TASK-START",
+      "status": "Pass",
+      "notes": "Timesheet task started",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "fc63824f-620b-40dd-9b37-f40709a3e345",
+            "version": 3,
+            "projectId": "d1583301-ac07-44d0-909f-0cf06116f090",
+            "stageId": "a0b3ff75-abb3-4d79-a508-afd4a9d79e87",
+            "taskCode": "TS-T1",
+            "taskName": "Timesheet Task",
+            "description": null,
+            "parentTaskId": null,
+            "priority": "MEDIUM",
+            "plannedHours": "0",
+            "completionPercentage": "0",
+            "status": "IN_PROGRESS",
+            "startDate": null,
+            "dueDate": null,
+            "activeParticipantEmployeeIds": [
+              "f60e46ed-20da-4703-8593-2849fa90492d"
+            ],
+            "allowedActions": [
+              "SUBMIT_REVIEW",
+              "LOG_TIME",
+              "ATTACH_DOCUMENT"
+            ],
+            "actionRequirements": {
+              "expectedVersion": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-CREATE",
+      "status": "Pass",
+      "notes": "Weekly timesheet ready",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "758cebb3-6509-41eb-baa3-e707d5d12591",
+            "version": 1,
+            "companyId": "e4c645f1-2359-439c-ac68-41785cf11e82",
+            "branchId": "5c79da96-64e5-4027-83fc-4c1de736b10c",
+            "employeeId": "f60e46ed-20da-4703-8593-2849fa90492d",
+            "periodStart": "2026-09-14",
+            "periodEnd": "2026-09-20",
+            "totalHours": "0",
+            "status": "DRAFT",
+            "remarks": null,
+            "reportingManagerEmployeeId": null,
+            "reportingManagerUserId": null,
+            "lines": [],
+            "allowedActions": [
+              "EDIT",
+              "SUBMIT",
+              "CANCEL"
+            ],
+            "actionRequirements": {
+              "expectedVersion": 1
+            }
+          }
+        },
+        "id": "758cebb3-6509-41eb-baa3-e707d5d12591"
+      }
+    },
+    {
+      "step": "PROJECT-03-LINE",
+      "status": "Pass",
+      "notes": "Timesheet line added",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "758cebb3-6509-41eb-baa3-e707d5d12591",
+            "version": 2,
+            "companyId": "e4c645f1-2359-439c-ac68-41785cf11e82",
+            "branchId": "5c79da96-64e5-4027-83fc-4c1de736b10c",
+            "employeeId": "f60e46ed-20da-4703-8593-2849fa90492d",
+            "periodStart": "2026-09-14",
+            "periodEnd": "2026-09-20",
+            "totalHours": "4",
+            "status": "DRAFT",
+            "remarks": null,
+            "reportingManagerEmployeeId": null,
+            "reportingManagerUserId": null,
+            "lines": [
+              {
+                "id": "8266649f-1dc3-4fed-848d-213bfa799ba3",
+                "version": 1,
+                "workDate": "2026-09-14",
+                "hours": "4",
+                "taskId": "fc63824f-620b-40dd-9b37-f40709a3e345",
+                "workCategoryId": null,
+                "sourceType": "MANUAL_ENTRY",
+                "remarks": null
+              }
+            ],
+            "allowedActions": [
+              "EDIT",
+              "SUBMIT",
+              "CANCEL"
+            ],
+            "actionRequirements": {
+              "expectedVersion": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-HOURS-LIMIT",
+      "status": "Pass",
+      "notes": "Daily hours limit enforced",
+      "detail": {
+        "status": 409,
+        "error": {
+          "success": false,
+          "statusCode": 409,
+          "error": "Conflict",
+          "code": "TIMESHEET_DAILY_HOURS_EXCEEDED",
+          "message": "Daily hours across timesheets cannot exceed 24.",
+          "requestId": "3aa11be7-a2e2-4e7d-b842-455124eb88f7",
+          "timestamp": "2026-09-02T06:53:10.185Z",
+          "path": "/me/timesheets/758cebb3-6509-41eb-baa3-e707d5d12591/lines",
+          "method": "POST"
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-SUBMIT",
+      "status": "Pass",
+      "notes": "Timesheet submitted",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "758cebb3-6509-41eb-baa3-e707d5d12591",
+            "version": 3,
+            "companyId": "e4c645f1-2359-439c-ac68-41785cf11e82",
+            "branchId": "5c79da96-64e5-4027-83fc-4c1de736b10c",
+            "employeeId": "f60e46ed-20da-4703-8593-2849fa90492d",
+            "periodStart": "2026-09-14",
+            "periodEnd": "2026-09-20",
+            "totalHours": "4",
+            "status": "SUBMITTED",
+            "remarks": null,
+            "reportingManagerEmployeeId": "c61231aa-8f3a-41b6-958c-30d8f729246b",
+            "reportingManagerUserId": "0841eba4-8c29-4ad0-8dbd-28d3bc84c4ab",
+            "lines": [
+              {
+                "id": "8266649f-1dc3-4fed-848d-213bfa799ba3",
+                "version": 1,
+                "workDate": "2026-09-14",
+                "hours": "4",
+                "taskId": "fc63824f-620b-40dd-9b37-f40709a3e345",
+                "workCategoryId": null,
+                "sourceType": "MANUAL_ENTRY",
+                "remarks": null
+              }
+            ],
+            "allowedActions": [],
+            "actionRequirements": {
+              "expectedVersion": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-SELF-APPROVE",
+      "status": "Pass",
+      "notes": "Self-approval denied",
+      "detail": {
+        "status": 403
+      }
+    },
+    {
+      "step": "PROJECT-03-RETURN",
+      "status": "Pass",
+      "notes": "Manager returned timesheet",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "758cebb3-6509-41eb-baa3-e707d5d12591",
+            "version": 4,
+            "companyId": "e4c645f1-2359-439c-ac68-41785cf11e82",
+            "branchId": "5c79da96-64e5-4027-83fc-4c1de736b10c",
+            "employeeId": "f60e46ed-20da-4703-8593-2849fa90492d",
+            "periodStart": "2026-09-14",
+            "periodEnd": "2026-09-20",
+            "totalHours": "4",
+            "status": "RETURNED",
+            "remarks": null,
+            "reportingManagerEmployeeId": "c61231aa-8f3a-41b6-958c-30d8f729246b",
+            "reportingManagerUserId": "0841eba4-8c29-4ad0-8dbd-28d3bc84c4ab",
+            "lines": [
+              {
+                "id": "8266649f-1dc3-4fed-848d-213bfa799ba3",
+                "version": 1,
+                "workDate": "2026-09-14",
+                "hours": "4",
+                "taskId": "fc63824f-620b-40dd-9b37-f40709a3e345",
+                "workCategoryId": null,
+                "sourceType": "MANUAL_ENTRY",
+                "remarks": null
+              }
+            ],
+            "allowedActions": [],
+            "actionRequirements": {
+              "expectedVersion": 4
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-RESUBMIT",
+      "status": "Pass",
+      "notes": "Employee resubmitted",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "758cebb3-6509-41eb-baa3-e707d5d12591",
+            "version": 5,
+            "companyId": "e4c645f1-2359-439c-ac68-41785cf11e82",
+            "branchId": "5c79da96-64e5-4027-83fc-4c1de736b10c",
+            "employeeId": "f60e46ed-20da-4703-8593-2849fa90492d",
+            "periodStart": "2026-09-14",
+            "periodEnd": "2026-09-20",
+            "totalHours": "4",
+            "status": "SUBMITTED",
+            "remarks": null,
+            "reportingManagerEmployeeId": "c61231aa-8f3a-41b6-958c-30d8f729246b",
+            "reportingManagerUserId": "0841eba4-8c29-4ad0-8dbd-28d3bc84c4ab",
+            "lines": [
+              {
+                "id": "8266649f-1dc3-4fed-848d-213bfa799ba3",
+                "version": 1,
+                "workDate": "2026-09-14",
+                "hours": "4",
+                "taskId": "fc63824f-620b-40dd-9b37-f40709a3e345",
+                "workCategoryId": null,
+                "sourceType": "MANUAL_ENTRY",
+                "remarks": null
+              }
+            ],
+            "allowedActions": [],
+            "actionRequirements": {
+              "expectedVersion": 5
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-APPROVE",
+      "status": "Pass",
+      "notes": "Manager approved",
+      "detail": {
+        "status": 201,
+        "error": {
+          "success": true,
+          "data": {
+            "id": "758cebb3-6509-41eb-baa3-e707d5d12591",
+            "version": 6,
+            "companyId": "e4c645f1-2359-439c-ac68-41785cf11e82",
+            "branchId": "5c79da96-64e5-4027-83fc-4c1de736b10c",
+            "employeeId": "f60e46ed-20da-4703-8593-2849fa90492d",
+            "periodStart": "2026-09-14",
+            "periodEnd": "2026-09-20",
+            "totalHours": "4",
+            "status": "APPROVED",
+            "remarks": null,
+            "reportingManagerEmployeeId": "c61231aa-8f3a-41b6-958c-30d8f729246b",
+            "reportingManagerUserId": "0841eba4-8c29-4ad0-8dbd-28d3bc84c4ab",
+            "lines": [
+              {
+                "id": "8266649f-1dc3-4fed-848d-213bfa799ba3",
+                "version": 1,
+                "workDate": "2026-09-14",
+                "hours": "4",
+                "taskId": "fc63824f-620b-40dd-9b37-f40709a3e345",
+                "workCategoryId": null,
+                "sourceType": "MANUAL_ENTRY",
+                "remarks": null
+              }
+            ],
+            "allowedActions": [],
+            "actionRequirements": {
+              "expectedVersion": 6
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "PROJECT-03-SUMMARY",
+      "status": "Pass",
+      "notes": "Project time summary readable",
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "step": "PROJECT-04",
+      "status": "Blocked",
+      "notes": "FILE_STORAGE_V2 + ClamAV not configured (ENV-04)",
+      "detail": null
+    }
+  ],
+  "passCount": 35,
+  "failCount": 0,
+  "blockedCount": 1
+}

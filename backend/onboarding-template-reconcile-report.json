@@ -1,0 +1,29 @@
+{
+  "sliceMismatch": [
+    {
+      "id": "5248e4c8-7ac5-4a22-81d8-965818f938b5",
+      "companyId": null,
+      "branchId": null,
+      "departmentId": "17debf6b-7fdb-4d8d-9b64-d53cab9fe653",
+      "versionId": "25cb386d-349e-420f-bb72-bab8f427637b",
+      "versionStatus": "DRAFT",
+      "versionIsCurrent": true,
+      "templateCompanyId": "eadf7f5f-1669-4e90-9f32-0a1040e7cebf",
+      "depCompanyId": "4770265b-b569-4510-b3ae-f039182eaae4",
+      "depBranchId": "f58e58a3-9070-43b7-b7fa-7ac2cb28d32b",
+      "depName": "Product Management"
+    }
+  ],
+  "nullOwner": [
+    {
+      "id": "4a890df1-d863-43b1-8bef-e425542a0723",
+      "taskName": "Submit ID copy",
+      "ownerType": null,
+      "versionId": "f9fae69c-3d72-4a0f-8412-a443023ad94b",
+      "versionStatus": "PUBLISHED",
+      "versionIsCurrent": true,
+      "templateId": "e65c5964-48b2-4e48-82fc-fe6ceb4161d6",
+      "templateName": "Staff"
+    }
+  ]
+}

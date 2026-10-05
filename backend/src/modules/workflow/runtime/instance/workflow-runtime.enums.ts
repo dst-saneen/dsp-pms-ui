@@ -1,0 +1,17 @@
+export enum WorkflowRuntimeStatus {
+  NOT_STARTED = 'NOT_STARTED',
+
+  READY = 'READY',
+
+  IN_PROGRESS = 'IN_PROGRESS',
+
+  WAITING = 'WAITING',
+
+  COMPLETED = 'COMPLETED',
+
+  FAILED = 'FAILED',
+
+  CANCELLED = 'CANCELLED',
+
+  SKIPPED = 'SKIPPED',
+}

@@ -1,0 +1,109 @@
+{
+  "executedAt": "2026-09-02T08:10:40.074Z",
+  "commit": "5916d458cef64ba798fcc440ee9eff024462306c",
+  "method": "API dual-session parallel fetch (simulates two browsers)",
+  "summary": {
+    "pass": 8,
+    "fail": 1,
+    "blocked": 1,
+    "partial": 0
+  },
+  "results": [
+    {
+      "step": "CONCURRENCY-01 preflight",
+      "status": "INFO",
+      "notes": "API dual-session simulation @ http://localhost:4500",
+      "detail": null
+    },
+    {
+      "step": "CONC-00 logins",
+      "status": "Pass",
+      "notes": "All UAT sessions established",
+      "detail": null
+    },
+    {
+      "step": "CONC-01 dual draft project edit",
+      "status": "Pass",
+      "notes": "win-left; statuses 200/409; version=2",
+      "detail": {
+        "left": {
+          "status": 200
+        },
+        "right": {
+          "status": 409,
+          "code": "PROJECT_STATE_CHANGED"
+        },
+        "authoritativeDescription": "Session A edit"
+      }
+    },
+    {
+      "step": "CONC-02 complete project vs child mutation",
+      "status": "Pass",
+      "notes": "complete=409; mutate=201",
+      "detail": {
+        "completeCode": "PROJECT_HAS_ACTIVE_WORK",
+        "taskId": "6732b244-c45c-41bb-b20b-489710eeb559"
+      }
+    },
+    {
+      "step": "CONC-03 reassign task vs employee submit",
+      "status": "Pass",
+      "notes": "win-right; reassign=409; submit=201",
+      "detail": {
+        "reassignCode": "TASK_STATE_CHANGED"
+      }
+    },
+    {
+      "step": "CONC-04 timesheet approve vs employee correction",
+      "status": "Pass",
+      "notes": "win-left; approve=201; line=409",
+      "detail": {
+        "lineCode": "TIMESHEET_STATE_CHANGED"
+      }
+    },
+    {
+      "step": "CONC-05 finance approve vs maker draft edit",
+      "status": "Pass",
+      "notes": "win-right; approve=409; edit=200",
+      "detail": {
+        "approveCode": "FINANCE_VERSION_CONFLICT"
+      }
+    },
+    {
+      "step": "CONC-06 dual payroll approve",
+      "status": "Blocked",
+      "notes": "No fresh calculable payroll month — Aug 2026 run PR-000005 already approved (Phase 5); other months ATTENDANCE_PERIOD_NOT_READY",
+      "detail": {
+        "aug2026Blockers": [
+          "PAYROLL_PERIOD_EXISTS",
+          "ATTENDANCE_PERIOD_IN_USE_BY_PAYROLL"
+        ]
+      }
+    },
+    {
+      "step": "CONC-07 dual mark paid (PR-000005)",
+      "status": "Fail",
+      "notes": "both-lost-conflict; statuses 409/409 — Phase 5 multi-employee mark-paid defect (no winner)",
+      "detail": {
+        "leftCode": "CONFLICT",
+        "rightCode": "CONFLICT",
+        "runId": "6cff3c74-8dd4-4793-9d15-e28e97dc5683",
+        "runNumber": "PR-000005"
+      }
+    },
+    {
+      "step": "CONC-08 replay completed command (same operationId)",
+      "status": "Pass",
+      "notes": "first=200; replay=200; code=undefined",
+      "detail": {}
+    },
+    {
+      "step": "CONC-09 reuse operationId with changed payload",
+      "status": "Pass",
+      "notes": "first=200; second=409; code=OPERATION_ID_REUSED",
+      "detail": {
+        "secondMessage": "operationId was already used with a different request."
+      }
+    }
+  ]
+}

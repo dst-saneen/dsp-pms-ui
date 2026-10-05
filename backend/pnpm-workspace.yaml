@@ -1,0 +1,13 @@
+allowBuilds:
+  '@prisma/engines': true
+  '@scarf/scarf': true
+  argon2: true
+  bcrypt: true
+  esbuild: true
+  prisma: true
+  unrs-resolver: true
+
+# exceljs@4.4.0 pulls unzipper@0.10.x → binary → buffers@0.1.1 (no declared license).
+# unzipper@0.12.3 is MIT and dropped that chain (exceljs#2866).
+overrides:
+  'exceljs>unzipper': 0.12.3

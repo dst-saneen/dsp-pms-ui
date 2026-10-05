@@ -1,0 +1,16 @@
+# Frontend dependencies and generated builds
+/node_modules/
+/.next/
+/out/
+/build/
+/dist/
+
+# Frontend test output
+/coverage/
+/test-results/
+/playwright-report/
+/blob-report/
+
+# Framework and hosting state
+/.vercel/
+next-env.d.ts

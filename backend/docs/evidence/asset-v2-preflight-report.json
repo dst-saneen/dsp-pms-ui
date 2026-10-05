@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-08-19T05:32:48.556Z",
+  "databaseName": "dsp_erp_dev",
+  "databaseSchema": "dsp_pms",
+  "exceptionCount": 33,
+  "findings": [
+    {
+      "code": "ASSET_REQUIRES_DEPARTMENT",
+      "count": 12,
+      "ids": [
+        "13870cec-ba2b-482a-9044-26c703e17641",
+        "1d0d4846-001e-477e-8cc6-9759a68d408d",
+        "37952faf-977c-4ba4-9962-f4e0033deac8",
+        "49d76e05-973c-422c-aaec-e0119505b29d",
+        "4c84f8ad-4213-4bbe-953b-1920431463bc",
+        "79580b22-5cef-483f-98b8-ac0d85a2b85d",
+        "7b02ce90-8888-4077-b648-0802c18523f1",
+        "88cbfa35-c469-465d-8206-e25dcea5426c",
+        "c4c87997-1100-4c61-9def-09e006ed92af",
+        "e15e5b73-864b-414b-863c-178beb2b0d59",
+        "e46ad98a-67c3-4c36-8081-0cd506633b3e",
+        "fd3f591b-1eab-446d-b803-7ee01cc6491a"
+      ]
+    },
+    {
+      "code": "TYPE_REQUIRES_KIND_TRACKING",
+      "count": 20,
+      "ids": [
+        "0439626b-f844-4cd0-8432-011e102dbf7a",
+        "09e217cc-4d15-41e5-ae59-7bec7e8d0f0b",
+        "2c5546c7-f364-447e-823f-be07a0ed8ed5",
+        "2fbe5ffc-1398-4c38-9bf2-266055000401",
+        "3787d341-db64-4afd-968e-964ee56de1b6",
+        "46791d49-2f2b-4953-be3d-3013f492e74d",
+        "4fecdc44-44e1-46dd-8acd-486ea4d8c165",
+        "58611c3e-32e3-4ec1-894b-58e3cd77c93e",
+        "5c01d778-e1c0-420e-8dae-9196e9a9e9ed",
+        "5fc7feeb-868a-481c-94e5-050898d39dbd",
+        "616ff1a0-0783-43a9-93f2-fcf5cf05d206",
+        "651838b9-6848-4503-a376-f85a62ea6fc8",
+        "c4fce38b-fee9-44ce-8b22-0dc2779066a4",
+        "c60a0a0c-134e-49f6-8e6a-b4e24e3fc61d",
+        "cfb705aa-2af1-422b-9542-6127b0806a74",
+        "e4107bc7-007a-4eb6-b108-3ff06f921bb4",
+        "e7d81f0d-8f3b-4d28-9ae1-2df62190ebfb",
+        "ed95e4f7-98b8-41a4-b971-c0afe68a71fa",
+        "f6dc0375-fbed-4238-af89-9eea74736cb6",
+        "fcde60be-b18b-4def-bdd7-09d9cde5556e"
+      ]
+    },
+    {
+      "code": "CUSTODY_SNAPSHOT_MISSING",
+      "count": 1,
+      "ids": [
+        "e9dad735-bdc4-40be-86ff-d05753d41ee0"
+      ]
+    }
+  ]
+}

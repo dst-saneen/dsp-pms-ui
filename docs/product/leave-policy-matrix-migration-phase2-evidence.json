@@ -1,0 +1,136 @@
+{
+  "recordedAt": "2026-08-13T05:52:46.070Z",
+  "operator": "bm",
+  "notes": "Read-only Phase 2 assessment. No DDL/DML applied.",
+  "identity": {
+    "database_name": "dsp_erp_dev",
+    "current_schema": "dsp_pms",
+    "connected_user": "dscape",
+    "search_path": "dsp_pms"
+  },
+  "duplicates": {
+    "branch_default": {
+      "rowCount": 0,
+      "rows": []
+    },
+    "branch_department": {
+      "rowCount": 0,
+      "rows": []
+    },
+    "branch_designation": {
+      "rowCount": 0,
+      "rows": []
+    },
+    "branch_department_designation": {
+      "rowCount": 0,
+      "rows": []
+    }
+  },
+  "duplicatesAllZero": true,
+  "workflows": [
+    {
+      "id": "4939efeb-ace6-4bfd-9264-0c34b8fde13c",
+      "scopeKey": "GLOBAL:LEAVE_APPROVAL",
+      "companyId": null,
+      "isActive": true,
+      "step_count": 1,
+      "steps": "1:REPORTING_MANAGER"
+    }
+  ],
+  "workflowClassification": [
+    {
+      "id": "4939efeb-ace6-4bfd-9264-0c34b8fde13c",
+      "scopeKey": "GLOBAL:LEAVE_APPROVAL",
+      "companyId": null,
+      "isActive": true,
+      "step_count": 1,
+      "steps": "1:REPORTING_MANAGER",
+      "kind": "GLOBAL",
+      "hasHrStep": false,
+      "willAddHrStep": true
+    }
+  ],
+  "expectedHrStepsToAdd": 1,
+  "baselineCounts": [
+    {
+      "entity": "leave_policies",
+      "row_count": 6
+    },
+    {
+      "entity": "leave_requests",
+      "row_count": 10
+    },
+    {
+      "entity": "employee_leave_balances",
+      "row_count": 10
+    },
+    {
+      "entity": "approval_transactions",
+      "row_count": 5
+    },
+    {
+      "entity": "approval_workflow_steps",
+      "row_count": 3
+    }
+  ],
+  "leaveRequestStatusCounts": [
+    {
+      "status": "APPROVED",
+      "row_count": 4
+    },
+    {
+      "status": "DRAFT",
+      "row_count": 5
+    },
+    {
+      "status": "SUBMITTED",
+      "row_count": 1
+    }
+  ],
+  "existingLeaveWorkflowSteps": [
+    {
+      "id": "e0fe85da-4a8c-4b15-aef4-3b3ff0a63e1a",
+      "workflowId": "4939efeb-ace6-4bfd-9264-0c34b8fde13c",
+      "stepNo": 1,
+      "approverType": "REPORTING_MANAGER",
+      "approverRole": null,
+      "scopeKey": "GLOBAL:LEAVE_APPROVAL"
+    }
+  ],
+  "eligibleHrAssignments": [
+    {
+      "role_code": "HR_MANAGER",
+      "companyId": "eadf7f5f-1669-4e90-9f32-0a1040e7cebf",
+      "branchId": null,
+      "scope": "COMPANY",
+      "active_user_count": 4
+    },
+    {
+      "role_code": "HR_MANAGER",
+      "companyId": "f5b7cbb1-9ef1-4062-a946-7bfa8ead4ff1",
+      "branchId": null,
+      "scope": "COMPANY",
+      "active_user_count": 1
+    },
+    {
+      "role_code": "ORGANIZATION_OWNER",
+      "companyId": null,
+      "branchId": null,
+      "scope": "COMPANY_GROUP",
+      "active_user_count": 2
+    }
+  ],
+  "eligibleHrUserTotal": {
+    "active_hr_users": 7
+  },
+  "companiesGettingHrStep": [],
+  "companiesGettingHrStepMissingEligibleHr": [],
+  "pass": {
+    "databaseIdentity": true,
+    "duplicatesZero": true,
+    "workflowInventoryCaptured": true,
+    "baselineCountsCaptured": true,
+    "hrCoverageOk": true
+  },
+  "overallPass": true
+}

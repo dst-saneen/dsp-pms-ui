@@ -1,0 +1,19 @@
+export enum ExecutionMode {
+  MANUAL = 'MANUAL',
+
+  WORKFLOW = 'WORKFLOW',
+
+  APPROVAL = 'APPROVAL',
+
+  DOCUMENT = 'DOCUMENT',
+
+  TRAINING = 'TRAINING',
+
+  ASSET = 'ASSET',
+
+  NOTIFICATION = 'NOTIFICATION',
+
+  API = 'API',
+
+  SCRIPT = 'SCRIPT',
+}

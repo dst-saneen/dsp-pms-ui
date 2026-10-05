@@ -1,0 +1,75 @@
+{
+  "recordedAt": "2026-08-13T05:58:32.621Z",
+  "reason": "Post-incident verify: Phase 3a wrapper passed DATABASE_URL with disposable schema, but prisma.config.ts forced DATABASE_SCHEMA=dsp_pms and migrate deploy applied B0 to shared schema.",
+  "identity": {
+    "database_name": "dsp_erp_dev",
+    "current_schema": "dsp_pms"
+  },
+  "migration": [
+    {
+      "migration_name": "20260811120000_leave_policy_matrix_and_manager_hr_approval",
+      "started_at": "2026-08-13T05:57:41.067Z",
+      "finished_at": "2026-08-13T05:57:41.849Z",
+      "rolled_back_at": null
+    }
+  ],
+  "indexes": [
+    {
+      "indexname": "approval_transaction_steps_approverId_status_stepNo_idx"
+    },
+    {
+      "indexname": "leave_policies_active_branch_default_uidx"
+    },
+    {
+      "indexname": "leave_policies_active_branch_dept_designation_uidx"
+    },
+    {
+      "indexname": "leave_policies_active_branch_dept_uidx"
+    },
+    {
+      "indexname": "leave_policies_active_branch_designation_uidx"
+    },
+    {
+      "indexname": "leave_requests_status_submittedAt_idx"
+    }
+  ],
+  "indexCount": 6,
+  "workflows": [
+    {
+      "scopeKey": "GLOBAL:LEAVE_APPROVAL",
+      "isActive": true,
+      "step_count": 2,
+      "steps": "1:REPORTING_MANAGER, 2:ROLE:HR_MANAGER"
+    }
+  ],
+  "counts": [
+    {
+      "entity": "leave_policies",
+      "row_count": 6
+    },
+    {
+      "entity": "leave_requests",
+      "row_count": 10
+    },
+    {
+      "entity": "employee_leave_balances",
+      "row_count": 10
+    },
+    {
+      "entity": "approval_transactions",
+      "row_count": 5
+    },
+    {
+      "entity": "approval_workflow_steps",
+      "row_count": 4
+    }
+  ],
+  "expectedVsBaseline": {
+    "leave_policies_unchanged": true,
+    "leave_requests_unchanged": true,
+    "balances_unchanged": true,
+    "approval_transactions_unchanged": true,
+    "workflow_steps_plus_one": true
+  },
+  "pass": true
+}

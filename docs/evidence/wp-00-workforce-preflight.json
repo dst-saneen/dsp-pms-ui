@@ -1,0 +1,101 @@
+{
+  "recordedAt": "2026-08-05T08:12:50.973Z",
+  "purpose": "WP-00 workforce preflight (read-only)",
+  "database": {
+    "name": "dsp_erp_dev",
+    "schema": "dsp_pms",
+    "host": "vtrios-db-lms.cp6mke4my3ho.ap-south-1.rds.amazonaws.com",
+    "isAwsRds": true,
+    "disposable": false,
+    "warning": "Configured target is shared AWS dsp_erp_dev — NOT disposable. WP-01 migrate create/apply must use a local disposable dsp_pms database."
+  },
+  "postgresVersion": "PostgreSQL 17.9 on aarch64-unknown-linux-gnu, compiled by aarch64-unknown-linux-gnu-gcc (GCC) 12.4.0, 64-bit",
+  "counts": {
+    "companies": {
+      "label": "companies",
+      "value": 4
+    },
+    "branches": {
+      "label": "branches",
+      "value": 7
+    },
+    "branchWorkingDays": {
+      "label": "branchWorkingDays",
+      "value": 49
+    },
+    "shifts": {
+      "label": "shifts",
+      "value": 3
+    },
+    "employeeShifts": {
+      "label": "employeeShifts",
+      "value": 0
+    },
+    "holidays": {
+      "label": "holidays",
+      "value": 0
+    },
+    "leaveTypes": {
+      "label": "leaveTypes",
+      "value": 3
+    },
+    "leaveBalances": {
+      "label": "leaveBalances",
+      "value": 0
+    },
+    "leaveRequests": {
+      "label": "leaveRequests",
+      "value": 0
+    },
+    "attendance": {
+      "label": "attendance",
+      "value": 0
+    },
+    "approvalWorkflows": {
+      "label": "approvalWorkflows",
+      "value": 0
+    },
+    "approvalWorkflowSteps": {
+      "label": "approvalWorkflowSteps",
+      "value": 0
+    },
+    "employees": {
+      "label": "employees",
+      "value": 12
+    },
+    "branchesMissingTimezone": {
+      "label": "branchesMissingTimezone",
+      "value": 3
+    },
+    "newWorkforceTables_shiftRosters": {
+      "label": "newWorkforceTables_shiftRosters",
+      "value": 0
+    }
+  },
+  "distinctValues": {
+    "holidayType": {
+      "label": "holidayType",
+      "values": []
+    },
+    "leaveRequestStatus": {
+      "label": "leaveRequestStatus",
+      "values": []
+    },
+    "attendanceStatus": {
+      "label": "attendanceStatus",
+      "values": []
+    },
+    "attendanceSource": {
+      "label": "attendanceSource",
+      "values": []
+    },
+    "attendanceApprovalStatus": {
+      "label": "attendanceApprovalStatus",
+      "values": []
+    },
+    "approvalWorkflowCodes": {
+      "label": "approvalWorkflowCodes",
+      "values": []
+    }
+  }
+}

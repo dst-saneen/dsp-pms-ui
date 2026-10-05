@@ -1,0 +1,80 @@
+# Dependencies and package managers
+**/node_modules/
+**/.pnpm-store/
+**/.pnp
+**/.pnp.*
+**/.yarn/*
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/versions
+
+# pnpm is the source of truth; pnpm-lock.yaml remains tracked
+**/package-lock.json
+**/yarn.lock
+
+# Environment files; documented templates remain tracked
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
+
+# Secrets and local certificates
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test output, caches, and compiler state
+**/coverage/
+**/.nyc_output/
+**/.cache/
+**/.temp/
+**/.tmp/
+**/.turbo/
+**/.eslintcache
+**/*.tsbuildinfo
+**/test-results/
+**/playwright-report/
+**/blob-report/
+
+# Repository-local generated output
+**/.qa-runs/
+/outputs/
+/.codex-tmp/
+/.tmp-*/
+/phase-0-baseline/
+/phase-4-database/
+/phase-5-release/
+/uat-*.json
+/uat-*.txt
+**/graphify-out/
+/.worktrees/
+
+# Generated databases and source archives
+*.db
+*.sqlite
+*.sqlite3
+*.zip
+*.rar
+*.7z
+
+# IDE and OS files
+.vscode/
+.idea/
+.history/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Local design references (third-party screenshots)
+designs/reference_image/

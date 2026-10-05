@@ -1,0 +1,162 @@
+{
+  "recordedAt": "2026-08-13T06:20:57.190Z",
+  "leaveDate": "2026-09-03",
+  "requestId": "65e72e45-6a26-4a11-b1ec-a7b2893dc3ba",
+  "pass": 18,
+  "fail": 0,
+  "results": [
+    {
+      "id": "login.emp",
+      "status": "PASS",
+      "notes": "Employee logged in",
+      "detail": {
+        "employeeId": "6edbbbd7-116b-48cd-a598-87d9e5a10697"
+      }
+    },
+    {
+      "id": "login.mgr",
+      "status": "PASS",
+      "notes": "Manager logged in",
+      "detail": {
+        "employeeId": "073cab20-09f1-4283-b929-22b58a235db6"
+      }
+    },
+    {
+      "id": "login.hr",
+      "status": "PASS",
+      "notes": "HR logged in",
+      "detail": {
+        "employeeId": "5ced253a-e081-486f-9a05-983c0b986722"
+      }
+    },
+    {
+      "id": "emp.balances",
+      "status": "PASS",
+      "notes": "Employee balances readable (1)",
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "id": "matrix.get",
+      "status": "PASS",
+      "notes": "Matrix loaded for Kowdiar",
+      "detail": null
+    },
+    {
+      "id": "matrix.zeroReject",
+      "status": "PASS",
+      "notes": "Zero entitlement rejected (400)",
+      "detail": {
+        "status": 400,
+        "code": "VALIDATION_ERROR"
+      }
+    },
+    {
+      "id": "matrix.save",
+      "status": "PASS",
+      "notes": "Matrix save ok saved={\"created\":0,\"updated\":0,\"disabled\":0,\"unchanged\":10}",
+      "detail": {
+        "status": 200,
+        "saved": {
+          "created": 0,
+          "updated": 0,
+          "disabled": 0,
+          "unchanged": 10
+        }
+      }
+    },
+    {
+      "id": "matrix.noopNoDup",
+      "status": "PASS",
+      "notes": "Re-save ok created=0 updated=0 unchanged=10",
+      "detail": {
+        "created": 0,
+        "updated": 0,
+        "disabled": 0,
+        "unchanged": 10
+      }
+    },
+    {
+      "id": "emp.leaveTypes",
+      "status": "PASS",
+      "notes": "Using leaveType 0653ceb4-0e8f-4b17-b384-9dac6daf28d3",
+      "detail": null
+    },
+    {
+      "id": "emp.createDraft",
+      "status": "PASS",
+      "notes": "Draft 65e72e45-6a26-4a11-b1ec-a7b2893dc3ba on 2026-09-08",
+      "detail": {
+        "status": 201
+      }
+    },
+    {
+      "id": "emp.submit",
+      "status": "PASS",
+      "notes": "Submitted; status=SUBMITTED",
+      "detail": {
+        "status": 201,
+        "leaveStatus": "SUBMITTED"
+      }
+    },
+    {
+      "id": "emp.selfApproveBlocked",
+      "status": "PASS",
+      "notes": "Self-approve blocked (403)",
+      "detail": {
+        "status": 403,
+        "code": "FORBIDDEN"
+      }
+    },
+    {
+      "id": "mgr.queue",
+      "status": "PASS",
+      "notes": "Manager queue 1 items; target present",
+      "detail": null
+    },
+    {
+      "id": "mgr.approve",
+      "status": "PASS",
+      "notes": "Manager approved; status=SUBMITTED",
+      "detail": {
+        "status": 201,
+        "leaveStatus": "SUBMITTED"
+      }
+    },
+    {
+      "id": "mgr.doubleApprove",
+      "status": "PASS",
+      "notes": "Double approve blocked (403)",
+      "detail": {
+        "status": 403,
+        "code": "APPROVER_NOT_ELIGIBLE"
+      }
+    },
+    {
+      "id": "hr.queue",
+      "status": "PASS",
+      "notes": "HR queue 1 items",
+      "detail": null
+    },
+    {
+      "id": "hr.finalApprove",
+      "status": "PASS",
+      "notes": "HR approve ok; status=APPROVED",
+      "detail": {
+        "status": 201,
+        "leaveStatus": "APPROVED"
+      }
+    },
+    {
+      "id": "cal.load",
+      "status": "PASS",
+      "notes": "Calendar 3 days; holiday markers=0",
+      "detail": {
+        "status": 200,
+        "dayCount": 3
+      }
+    }
+  ],
+  "overallPass": true
+}

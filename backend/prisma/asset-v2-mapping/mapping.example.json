@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "departmentByAssetId": {},
+  "classificationByAssetTypeId": {},
+  "serialByAssetId": {},
+  "locationByAssetId": {},
+  "softwareByAssetId": {},
+  "archives": []
+}

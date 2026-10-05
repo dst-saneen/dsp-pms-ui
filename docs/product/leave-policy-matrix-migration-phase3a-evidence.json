@@ -1,0 +1,17 @@
+{
+  "phase": "3a-empty-disposable-rehearsal",
+  "startedAt": "2026-08-13T05:57:35.073Z",
+  "finishedAt": "2026-08-13T05:57:42.661Z",
+  "operator": "bm",
+  "host": "vtrios-db-lms.cp6mke4my3ho.ap-south-1.rds.amazonaws.com",
+  "databaseName": "dsp_erp_dev",
+  "approach": "Same RDS host, B0_ALLOW_SHARED_DEV=1, isolated disposable schema then DROP CASCADE. dsp_pms untouched.",
+  "disposableSchema": "leave_b0_disposable_msr3wgap",
+  "schemaDropped": true,
+  "firstDeployOk": true,
+  "objectsVerified": false,
+  "secondDeployIdempotent": false,
+  "overallPass": false,
+  "exitCode": 1,
+  "noteProductionShaped": "Phase 3b (production-shaped disposable copy) still needs a separately named disposable DB or approved snapshot restore. Not run in this step."
+}

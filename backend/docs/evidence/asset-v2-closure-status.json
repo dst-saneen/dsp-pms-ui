@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-08-19",
+  "environment": "dsp_erp_dev / dsp_pms",
+  "engineeringStatus": "closure-complete-pending-manager-sign-off",
+  "completedItems": [
+    "P0/P1 code fixes (licence retry, clearance scope, physical retry, command replay, waiver/transfer contract)",
+    "DB backfill and 0 preflight exceptions on dev",
+    "Contract, source-command, and ack_pair migrations applied",
+    "Prisma schema aligned with enforced DB",
+    "Eligible employee/asset picker APIs and frontend selectors",
+    "Version conflict UX on asset workspaces",
+    "95 unit asset tests + 3 PostgreSQL integration tests passing",
+    "Integrity script 0 exceptions"
+  ],
+  "pendingManagerItems": [
+    "Formal approval of asset-v2-mapping-review.csv (approvedBy + evidenceReference per row)",
+    "Business UAT sign-off on pilot companies",
+    "Backup/restore rehearsal on production-shaped disposable copy",
+    "Expand ASSET_V2_SCOPE_ALLOWLIST_JSON beyond pilot after sign-off"
+  ],
+  "mappingArtifact": "backend/docs/evidence/asset-v2-mapping-review.csv",
+  "devMappingApplied": "backend/prisma/asset-v2-mapping/mapping.dev-proposed.json"
+}

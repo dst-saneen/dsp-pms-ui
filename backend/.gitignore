@@ -1,0 +1,28 @@
+# Backend dependencies and generated builds
+/node_modules/
+/dist/
+/build/
+/generated/
+
+# Runtime-only files
+/certs/
+/uploads/
+/logs/
+
+# Test and QA output
+/coverage/
+/.nyc_output/
+.qa-runs/
+
+# Asset V2 operational reports and mappings
+/prisma/asset-v2-mapping/*.json
+!/prisma/asset-v2-mapping/*.example.json
+/asset-v2-*-report.*
+/asset-v2-backfill-*.json
+/asset-v2-preflight-report.*
+/asset-v2-integrity-report.json
+
+# Delivery V2 operational reports
+/delivery-v2-*-report.*
+/delivery-v2-preflight-report.*
+/delivery-v2-backfill-report.*

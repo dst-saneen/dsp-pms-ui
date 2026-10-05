@@ -1,0 +1,15 @@
+DSP PMS / Group ERP — Third-Party Notices
+==========================================
+
+Copyright (c) Datascapetek / Group ERP project contributors.
+Application source is proprietary (see backend package.json "UNLICENSED").
+
+This product includes open-source software and other third-party materials.
+Attribution, license elections (including JSZip under MIT), font OFL notices,
+and related compliance text are maintained in:
+
+  docs/THIRD_PARTY_NOTICES.md
+
+License/asset inventory:
+
+  docs/LICENSE_AUDIT.md

@@ -1,0 +1,119 @@
+{
+  "note": "Fill approved values here, then copy into prisma/asset-v2-mapping/mapping.json",
+  "departmentByAssetId": {
+    "7b02ce90-8888-4077-b648-0802c18523f1": "",
+    "49d76e05-973c-422c-aaec-e0119505b29d": "",
+    "79580b22-5cef-483f-98b8-ac0d85a2b85d": "",
+    "c4c87997-1100-4c61-9def-09e006ed92af": "",
+    "88cbfa35-c469-465d-8206-e25dcea5426c": "",
+    "4c84f8ad-4213-4bbe-953b-1920431463bc": "",
+    "fd3f591b-1eab-446d-b803-7ee01cc6491a": "ad949135-b2ca-4cc7-8dbf-ca75fe6da8a6",
+    "1d0d4846-001e-477e-8cc6-9759a68d408d": "",
+    "e15e5b73-864b-414b-863c-178beb2b0d59": "",
+    "e46ad98a-67c3-4c36-8081-0cd506633b3e": "",
+    "13870cec-ba2b-482a-9044-26c703e17641": "",
+    "37952faf-977c-4ba4-9962-f4e0033deac8": ""
+  },
+  "classificationByAssetTypeId": {
+    "58611c3e-32e3-4ec1-894b-58e3cd77c93e": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Chair"
+    },
+    "651838b9-6848-4503-a376-f85a62ea6fc8": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Chair"
+    },
+    "46791d49-2f2b-4953-be3d-3013f492e74d": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Desk"
+    },
+    "e4107bc7-007a-4eb6-b108-3ff06f921bb4": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Desk"
+    },
+    "09e217cc-4d15-41e5-ae59-7bec7e8d0f0b": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Desktop"
+    },
+    "616ff1a0-0783-43a9-93f2-fcf5cf05d206": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Desktop"
+    },
+    "2fbe5ffc-1398-4c38-9bf2-266055000401": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Headset"
+    },
+    "cfb705aa-2af1-422b-9542-6127b0806a74": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Headset"
+    },
+    "ed95e4f7-98b8-41a4-b971-c0afe68a71fa": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Keyboard"
+    },
+    "3787d341-db64-4afd-968e-964ee56de1b6": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Keyboard"
+    },
+    "c60a0a0c-134e-49f6-8e6a-b4e24e3fc61d": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Laptop"
+    },
+    "e7d81f0d-8f3b-4d28-9ae1-2df62190ebfb": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Laptop"
+    },
+    "f6dc0375-fbed-4238-af89-9eea74736cb6": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Monitor"
+    },
+    "4fecdc44-44e1-46dd-8acd-486ea4d8c165": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Monitor"
+    },
+    "5fc7feeb-868a-481c-94e5-050898d39dbd": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Mouse"
+    },
+    "0439626b-f844-4cd0-8432-011e102dbf7a": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Mouse"
+    },
+    "c4fce38b-fee9-44ce-8b22-0dc2779066a4": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Printer"
+    },
+    "fcde60be-b18b-4def-bdd7-09d9cde5556e": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Printer"
+    },
+    "5c01d778-e1c0-420e-8dae-9196e9a9e9ed": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Projector"
+    },
+    "2c5546c7-f364-447e-823f-be07a0ed8ed5": {
+      "kind": "FILL_ME",
+      "trackingMode": "FILL_ME",
+      "assetTypeName": "Projector"
+    }
+  }
+}

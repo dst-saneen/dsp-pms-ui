@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Group ERP">
+  <rect width="64" height="64" rx="16" fill="#F15A43"/>
+  <g stroke="#FFFFFF" stroke-width="3.25" stroke-linecap="round">
+    <circle cx="25.5" cy="26" r="8.4"/>
+    <circle cx="38.5" cy="26" r="8.4"/>
+    <circle cx="32" cy="36.5" r="8.4"/>
+  </g>
+</svg>
